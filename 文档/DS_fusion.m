@@ -6,6 +6,8 @@ function x=DS_fusion(x,y)
 % m(全集)可不为0，表示不确定度
 % m(空集)肯定是0
 
+%n为行数
+%m为列数
 [nx,mx]=size(x);
 if 1~=nx
     disp('x应为行向量');

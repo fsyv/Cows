@@ -146,10 +146,17 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+<<<<<<< .mine
     <ClCompile Include="ChartWidget.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_ChartWidget.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
+=======
+    <ClCompile Include="DS_fusion.cpp" />
+
+
+
+>>>>>>> .theirs
     <ClCompile Include="GeneratedFiles\Debug\moc_mainwidget.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -184,6 +191,13 @@
     <ClInclude Include="GeneratedFiles\ui_mainwidget.h" />
     <ClInclude Include="NFCOperator.h" />
     <ClInclude Include="dll.h" />
+<<<<<<< .mine
+
+
+=======
+    <ClInclude Include="DS_fusion.h" />
+    <ClInclude Include="GeneratedFiles\ui_mainwidget.h" />
+>>>>>>> .theirs
     <CustomBuild Include="mainwidget.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fstdafx.h" "-f../../mainwidget.h"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_SERIALPORT_LIB -DQT_SQL_LIB -DQT_WIDGETS_LIB -DQT_CHARTS_LIB -DQT_GUI_LIB -DQT_CORE_LIB "-I." "-I.\GeneratedFiles" "-I.\GeneratedFiles\Debug" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtCharts" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtSerialPort" "-I$(QTDIR)\include\QtCore" "-I.\GeneratedFiles\debug" "-I$(QTDIR)\mkspecs\win32-msvc2015" "-I.\GeneratedFiles"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing mainwidget.h...</Message>
