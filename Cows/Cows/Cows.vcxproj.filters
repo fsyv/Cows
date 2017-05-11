@@ -81,21 +81,17 @@
     <ClCompile Include="ChartWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-<<<<<<< .mine
     <ClCompile Include="GeneratedFiles\Debug\moc_ChartWidget.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_ChartWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-=======
     <ClCompile Include="DS_fusion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
 
 
-
->>>>>>> .theirs
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCOperator.h">

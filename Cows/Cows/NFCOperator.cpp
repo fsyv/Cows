@@ -1,10 +1,4 @@
-<<<<<<< .mine
 #include "stdafx.h"
-
-=======
-#include "stdafx.h"
-
->>>>>>> .theirs
 #include "NFCOperator.h"
 
 
