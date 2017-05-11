@@ -36,28 +36,27 @@
 CustomTableModel::CustomTableModel(QObject *parent) :
     QAbstractTableModel(parent)
 {
-    qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+    m_columnCount = 1;
+    headers << 't' << 'x' << 'y' << 'z';
 
-    m_columnCount = 4;
-    m_rowCount = 15;
+    m_data = new QMap<char, QList<qreal> * >;
 
-    // m_data
-    for (int i = 0; i < m_rowCount; i++) {
-        QVector<qreal>* dataVec = new QVector<qreal>(m_columnCount);
-        for (int k = 0; k < dataVec->size(); k++) {
-            if (k % 2 == 0)
-                dataVec->replace(k, i * 50 + qrand() % 20);
-            else
-                dataVec->replace(k, qrand() % 100);
-        }
-        m_data.append(dataVec);
+
+    m_data->insert('t', new QList<qreal>);
+    m_data->insert('x', new QList<qreal>);
+    m_data->insert('y', new QList<qreal>);
+    m_data->insert('z', new QList<qreal>);
+
+    for(int i = 0; i < 15; ++i)
+    {
+        addData(i, i, i, i);
     }
 }
 
 int CustomTableModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
-    return m_data.count();
+    return m_data->value('t')->count();
 }
 
 int CustomTableModel::columnCount(const QModelIndex &parent) const
@@ -72,10 +71,7 @@ QVariant CustomTableModel::headerData(int section, Qt::Orientation orientation, 
         return QVariant();
 
     if (orientation == Qt::Horizontal) {
-        if (section % 2 == 0)
-            return "x";
-        else
-            return "y";
+        return headers.at(section);
     } else {
         return QString("%1").arg(section + 1);
     }
@@ -84,9 +80,9 @@ QVariant CustomTableModel::headerData(int section, Qt::Orientation orientation, 
 QVariant CustomTableModel::data(const QModelIndex &index, int role) const
 {
     if (role == Qt::DisplayRole) {
-        return m_data[index.row()]->at(index.column());
+        return m_data->value(headers.at(index.row()))->at(index.column());
     } else if (role == Qt::EditRole) {
-        return m_data[index.row()]->at(index.column());
+        return m_data->value(headers.at(index.row()))->at(index.column());
     } else if (role == Qt::BackgroundRole) {
         foreach (QRect rect, m_mapping) {
             if (rect.contains(index.column(), index.row()))
@@ -101,7 +97,7 @@ QVariant CustomTableModel::data(const QModelIndex &index, int role) const
 bool CustomTableModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (index.isValid() && role == Qt::EditRole) {
-        m_data[index.row()]->replace(index.column(), value.toDouble());
+        m_data->value(headers.at(index.row()))->replace(index.column(), value.toDouble());
         emit dataChanged(index, index);
         return true;
     }
@@ -116,4 +112,20 @@ Qt::ItemFlags CustomTableModel::flags(const QModelIndex &index) const
 void CustomTableModel::addMapping(QString color, QRect area)
 {
     m_mapping.insertMulti(color, area);
+}
+
+void CustomTableModel::addData(qreal t, qreal x, qreal y, qreal z)
+{
+    m_data->value('t')->append(t);
+    m_data->value('x')->append(x);
+    m_data->value('y')->append(y);
+    m_data->value('z')->append(z);
+}
+
+void CustomTableModel::addData(const QList<qreal> &ts, const QList<qreal> &xs, const QList<qreal> &ys, const QList<qreal> &zs)
+{
+    m_data->value('t')->append(ts);
+    m_data->value('x')->append(xs);
+    m_data->value('y')->append(ys);
+    m_data->value('z')->append(zs);
 }

@@ -33,6 +33,9 @@
 #include <QtCore/QAbstractTableModel>
 #include <QtCore/QHash>
 #include <QtCore/QRect>
+#include <QMap>
+
+#include <QTableView>
 
 class CustomTableModel : public QAbstractTableModel
 {
@@ -49,9 +52,13 @@ public:
 
     void addMapping(QString color, QRect area);
     void clearMapping() { m_mapping.clear(); }
+    //添加数据
+    void addData(qreal t, qreal x, qreal y, qreal z);
+    void addData(const QList<qreal> &ts, const QList<qreal> &xs, const QList<qreal> &ys, const QList<qreal> &zs);
 
 private:
-    QList<QVector<qreal> * > m_data;
+    QList<int> headers;
+    QMap<char, QList<qreal> * > *m_data;
     QHash<QString, QRect> m_mapping;
     int m_columnCount;
     int m_rowCount;
