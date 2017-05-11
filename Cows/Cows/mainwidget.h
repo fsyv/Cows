@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QtWidgets/QWidget>
-#include "ui_mainwidget.h"
+#include <QtCharts>
 
 class MainWidget : public QWidget
 {
@@ -11,5 +11,5 @@ public:
     MainWidget(QWidget *parent = Q_NULLPTR);
 
 private:
-    Ui::MainWidgetClass ui;
+	
 };
