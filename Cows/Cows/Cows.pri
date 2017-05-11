@@ -7,13 +7,17 @@
 message("You are running qmake on a generated .pro file. This may not work!")
 
 
-HEADERS += ./dll.h \
-    ./NFCOperator.h \
-    ./stdafx.h \
-    ./mainwidget.h
-SOURCES += ./main.cpp \
-    ./mainwidget.cpp \
+HEADERS += ./NFCOperator.h \
+    ./dll.h \
+    ./DS_fusion.h \
+    ./ChartWidget.h \
+    ./mainwidget.h \
+    ./stdafx.h
+SOURCES += ./ChartWidget.cpp \
+    ./DS_fusion.cpp \
     ./NFCOperator.cpp \
+    ./main.cpp \
+    ./mainwidget.cpp \
     ./stdafx.cpp
 FORMS += ./mainwidget.ui
 RESOURCES += mainwidget.qrc

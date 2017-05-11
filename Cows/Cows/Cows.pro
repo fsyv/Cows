@@ -5,12 +5,18 @@
 TEMPLATE = app
 TARGET = Cows
 DESTDIR = ../x64/Debug
-QT += core sql widgets charts gui serialport 
+QT += core sql widgets gui serialport
 CONFIG += debug
-DEFINES += WIN64 QT_SERIALPORT_LIB QT_SQL_LIB QT_WIDGETS_LIB
-INCLUDEPATH += ./GeneratedFiles \
+DEFINES += _WINDOWS WIN64 WIN64 QT_SERIALPORT_LIB QT_SQL_LIB QT_WIDGETS_LIB QT_CHARTS_LIB QT_WIDGETS_LIB QT_SQL_LIB QT_SERIALPORT_LIB
+INCLUDEPATH += . \
+    ./GeneratedFiles \
     . \
-    ./GeneratedFiles/Debug
+    ./GeneratedFiles/Debug \
+    ./GeneratedFiles/debug \
+    ./GeneratedFiles \
+    $(QTDIR)/mkspecs/win32-msvc2015 \
+    ./GeneratedFiles
+LIBS += -lshell32
 PRECOMPILED_HEADER = stdafx.h
 DEPENDPATH += .
 MOC_DIR += ./GeneratedFiles/debug
