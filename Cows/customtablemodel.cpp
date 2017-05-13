@@ -47,7 +47,7 @@ CustomTableModel::CustomTableModel(QObject *parent) :
     m_data->insert('y', new QList<qreal>);
     m_data->insert('z', new QList<qreal>);
 
-    for(int i = 0; i < 15; ++i)
+    for(int i = 0; i < 50; ++i)
     {
         addData(i, i, i, i);
     }
@@ -62,7 +62,7 @@ int CustomTableModel::rowCount(const QModelIndex &parent) const
 int CustomTableModel::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
-    return m_columnCount;
+    return headers.count();
 }
 
 QVariant CustomTableModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -71,7 +71,7 @@ QVariant CustomTableModel::headerData(int section, Qt::Orientation orientation, 
         return QVariant();
 
     if (orientation == Qt::Horizontal) {
-        return headers.at(section);
+        return QString("%1").arg(headers.at(section));
     } else {
         return QString("%1").arg(section + 1);
     }
@@ -80,9 +80,9 @@ QVariant CustomTableModel::headerData(int section, Qt::Orientation orientation, 
 QVariant CustomTableModel::data(const QModelIndex &index, int role) const
 {
     if (role == Qt::DisplayRole) {
-        return m_data->value(headers.at(index.row()))->at(index.column());
+		return m_data->value(headers.at(index.column()))->at(index.row());
     } else if (role == Qt::EditRole) {
-        return m_data->value(headers.at(index.row()))->at(index.column());
+		return m_data->value(headers.at(index.column()))->at(index.row());
     } else if (role == Qt::BackgroundRole) {
         foreach (QRect rect, m_mapping) {
             if (rect.contains(index.column(), index.row()))

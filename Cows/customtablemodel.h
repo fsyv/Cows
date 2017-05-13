@@ -57,7 +57,7 @@ public:
     void addData(const QList<qreal> &ts, const QList<qreal> &xs, const QList<qreal> &ys, const QList<qreal> &zs);
 
 private:
-    QList<int> headers;
+    QList<char> headers;
     QMap<char, QList<qreal> * > *m_data;
     QHash<QString, QRect> m_mapping;
     int m_columnCount;
