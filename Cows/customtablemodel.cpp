@@ -105,7 +105,7 @@ bool CustomTableModel::setData(const QModelIndex &index, const QVariant &value, 
 
 Qt::ItemFlags CustomTableModel::flags(const QModelIndex &index) const
 {
-	return QAbstractItemModel::flags(index);// | Qt::ItemIsEditable;
+	return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
 }
 
 void CustomTableModel::addMapping(QString color, QRect area)

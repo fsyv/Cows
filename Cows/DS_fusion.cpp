@@ -44,7 +44,7 @@ void DS_fusion::solve(std::vector<double> &x, std::vector<double> &y)
 
 	//排除异常情况
 	//如果temp等于0，给它赋值为一个很小的数
-	temp = temp == 0 ? temp : 0.00000001;
+	temp = temp != 0 ? temp : 0.00000001;
 
 	for (int i = 0; i < size - 1; ++i)
 	{
