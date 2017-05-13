@@ -23,6 +23,7 @@ class TableWidget : public QWidget
     Q_OBJECT
 public:
     TableWidget(QWidget *parent = 0);
+    ~TableWidget();
 
 private:
 	void initAxis();

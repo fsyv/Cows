@@ -29,7 +29,8 @@ HEADERS += \
     stdafx.h \
     dll.h \
     DS_fusion.h \
-    NFCOperator.h
+    NFCOperator.h \
+    sqlexecute.h
 
 SOURCES += \
     customtablemodel.cpp \
@@ -37,7 +38,8 @@ SOURCES += \
     tablewidget.cpp \
     DS_fusion.cpp \
     NFCOperator.cpp \
-    stdafx.cpp
+    stdafx.cpp \
+    sqlexecute.cpp
 
 RC_FILE=Cows.rc
 

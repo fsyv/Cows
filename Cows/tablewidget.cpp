@@ -36,13 +36,24 @@ TableWidget::TableWidget(QWidget *parent)
 
     //! [9]
     // create main layout
-    QGridLayout *mainLayout = new QGridLayout;
-	mainLayout->addWidget(m_pTableView, 1, 0);
-	mainLayout->addWidget(m_pChartView, 1, 1);
-    mainLayout->setColumnStretch(1, 1);
-    mainLayout->setColumnStretch(0, 0);
-    setLayout(mainLayout);
+    m_pGridLayout = new QGridLayout;
+    m_pGridLayout->addWidget(m_pTableView, 1, 0);
+    m_pGridLayout->addWidget(m_pChartView, 1, 1);
+    m_pGridLayout->setColumnStretch(1, 1);
+    m_pGridLayout->setColumnStretch(0, 0);
+    setLayout(m_pGridLayout);
     //! [9]
+}
+
+TableWidget::~TableWidget()
+{
+    delete m_pModel;
+    delete m_pTableView;
+    delete m_pChart;
+    delete m_pChartView;
+    delete m_pSeriesX;
+    delete m_pSeriesY;
+    delete m_pSeriesZ;
 }
 
 void TableWidget::initAxis()
