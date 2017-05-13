@@ -62,46 +62,49 @@ TableWidget::TableWidget(QWidget *parent)
     chart->setAnimationOptions(QChart::AllAnimations);
     //! [3]
 
-    // series 1
-    //! [4]
-    QSplineSeries *series = new QSplineSeries;
-    series->setName("Line 1");
+    // XÇúÏß
+    QSplineSeries *series_x = new QSplineSeries;
+	series_x->setName("X");
     QVXYModelMapper *mapper = new QVXYModelMapper(this);
     mapper->setXColumn(0);
     mapper->setYColumn(1);
-    mapper->setSeries(series);
+	mapper->setSeries(series_x);
     mapper->setModel(model);
-    chart->addSeries(series);
-    //! [4]
+	chart->addSeries(series_x);
 
-    //! [5]
-    // for storing color hex from the series
     QString seriesColorHex = "#000000";
 
     // get the color of the series and use it for showing the mapped area
-    seriesColorHex = "#" + QString::number(series->pen().color().rgb(), 16).right(6).toUpper();
-    model->addMapping(seriesColorHex, QRect(0, 0, 2, model->rowCount()));
-    //! [5]
+	seriesColorHex = "#" + QString::number(series_x->pen().color().rgb(), 16).right(6).toUpper();
+    model->addMapping(seriesColorHex, QRect(1, 0, 1, model->rowCount()));
 
-
-    // series 2
-    //! [6]
-    QLineSeries *series1 = new QLineSeries;
-    series1->setName("Line 2");
+    // YÇúÏß
+	QSplineSeries *series_y = new QSplineSeries;
+	series_y->setName("Y");
 
     mapper = new QVXYModelMapper(this);
-    mapper->setXColumn(2);
-    mapper->setYColumn(3);
-    mapper->setSeries(series1);
+    mapper->setXColumn(0);
+    mapper->setYColumn(2);
+	mapper->setSeries(series_y);
     mapper->setModel(model);
-    chart->addSeries(series1);
-    //! [6]
+	chart->addSeries(series_y);
 
-    //! [7]
-    // get the color of the series and use it for showing the mapped area
-    seriesColorHex = "#" + QString::number(series1->pen().color().rgb(), 16).right(6).toUpper();
-    model->addMapping(seriesColorHex, QRect(2, 0, 2, model->rowCount()));
-    //! [7]
+	seriesColorHex = "#" + QString::number(series_y->pen().color().rgb(), 16).right(6).toUpper();
+    model->addMapping(seriesColorHex, QRect(2, 0, 1, model->rowCount()));
+
+	// ZÇúÏß
+	QSplineSeries *series_z = new QSplineSeries;
+	series_z->setName("Z");
+
+	mapper = new QVXYModelMapper(this);
+	mapper->setXColumn(0);
+	mapper->setYColumn(3);
+	mapper->setSeries(series_z);
+	mapper->setModel(model);
+	chart->addSeries(series_z);
+
+	seriesColorHex = "#" + QString::number(series_z->pen().color().rgb(), 16).right(6).toUpper();
+	model->addMapping(seriesColorHex, QRect(3, 0, 1, model->rowCount()));
 
     //! [8]
     chart->createDefaultAxes();

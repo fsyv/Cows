@@ -60,8 +60,6 @@ private:
     QList<char> headers;
     QMap<char, QList<qreal> * > *m_data;
     QHash<QString, QRect> m_mapping;
-    int m_columnCount;
-    int m_rowCount;
 };
 
 #endif // CUSTOMTABLEMODEL_H

@@ -36,7 +36,6 @@
 CustomTableModel::CustomTableModel(QObject *parent) :
     QAbstractTableModel(parent)
 {
-    m_columnCount = 1;
     headers << 't' << 'x' << 'y' << 'z';
 
     m_data = new QMap<char, QList<qreal> * >;
@@ -97,7 +96,7 @@ QVariant CustomTableModel::data(const QModelIndex &index, int role) const
 bool CustomTableModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (index.isValid() && role == Qt::EditRole) {
-        m_data->value(headers.at(index.row()))->replace(index.column(), value.toDouble());
+		m_data->value(headers.at(index.column()))->replace(index.row(), value.toDouble());
         emit dataChanged(index, index);
         return true;
     }
@@ -106,7 +105,7 @@ bool CustomTableModel::setData(const QModelIndex &index, const QVariant &value, 
 
 Qt::ItemFlags CustomTableModel::flags(const QModelIndex &index) const
 {
-    return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
+	return QAbstractItemModel::flags(index);// | Qt::ItemIsEditable;
 }
 
 void CustomTableModel::addMapping(QString color, QRect area)
