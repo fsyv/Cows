@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resource/export.png</file>
+        <file>resource/import.png</file>
+        <file>resource/exit.png</file>
+        <file>resource/connect.png</file>
+        <file>resource/disconnect.png</file>
+        <file>resource/readdata.png</file>
+        <file>resource/qt.png</file>
+        <file>resource/about.png</file>
+    </qresource>
+</RCC>

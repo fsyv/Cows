@@ -29,7 +29,8 @@ HEADERS += \
     stdafx.h \
     dll.h \
     DS_fusion.h \
-    NFCOperator.h
+    NFCOperator.h \
+    mainwidget.h
 
 SOURCES += \
     customtablemodel.cpp \
@@ -37,7 +38,14 @@ SOURCES += \
     tablewidget.cpp \
     DS_fusion.cpp \
     NFCOperator.cpp \
-    stdafx.cpp
+    stdafx.cpp \
+    mainwidget.cpp
 
 RC_FILE=Cows.rc
+
+FORMS += \
+    MainWindow.ui
+
+RESOURCES += \
+    resource.qrc
 
