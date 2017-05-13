@@ -17,7 +17,7 @@ public:
 
 protected slots:
 	void showChart();
-
+	void showAbout();
 private:
 
 	void signalConnect();

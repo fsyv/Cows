@@ -7,4 +7,5 @@
 #include <QtCharts/QLineSeries>
 #include <QtCharts/QSplineSeries>
 #include <QtCharts/QVXYModelMapper>
+#include <QtCharts/QValueAxis>
 #include<vector>

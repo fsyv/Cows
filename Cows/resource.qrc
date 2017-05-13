@@ -8,5 +8,6 @@
         <file>resource/readdata.png</file>
         <file>resource/qt.png</file>
         <file>resource/about.png</file>
+        <file>Cows.ico</file>
     </qresource>
 </RCC>
