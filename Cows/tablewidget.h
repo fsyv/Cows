@@ -1,7 +1,7 @@
 #pragma once
 #pragma  execution_character_set("utf-8")
 
-#include <QWidget>
+#include <QDialog>
 
 QT_BEGIN_NAMESPACE
 
@@ -19,12 +19,16 @@ namespace QtCharts{
 
 using namespace QtCharts;
 
-class TableWidget : public QWidget
+class TableWidget : public QDialog
 {
     Q_OBJECT
 public:
+	TableWidget(const QMap<char, QList<qreal> * > &data, QWidget *parent = 0);
     TableWidget(QWidget *parent = 0);
     ~TableWidget();
+
+//protected:
+//	void showEvent(QShowEvent *e);
 
 private:
 	void initAxis();

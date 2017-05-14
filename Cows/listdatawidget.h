@@ -4,19 +4,23 @@
 #include <QWidget>
 
 namespace Ui {
-class ListDataWidget;
+	class ListDataWidget;
 }
 
 class ListDataWidget : public QWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    explicit ListDataWidget(QWidget *parent = 0);
-    ~ListDataWidget();
+	explicit ListDataWidget(QWidget *parent = 0);
+	~ListDataWidget();
+
+private slots :
+	void showData(const QModelIndex &index);
 
 private:
 	void loadData();
 
-    Ui::ListDataWidget *ui;
+	Ui::ListDataWidget *ui;
+
 };

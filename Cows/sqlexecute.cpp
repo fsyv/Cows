@@ -50,7 +50,7 @@ void SQLExecute::exportData(QString tableName, QMap<char, QList<qreal> * > *data
 		.arg(QString("z REAL")) \
 		);
 
-	query.prepare(QString("INSERT INTO %1 VALUES(?, ?, ?, ?)").arg(tableName));
+	query.prepare(QString("INSERT INTO '%1' VALUES(?, ?, ?, ?)").arg(tableName));
 
 	QList<qreal> *t = data->value('t');
 
@@ -71,13 +71,13 @@ void SQLExecute::exportData(QString tableName, QMap<char, QList<qreal> * > *data
 }
 
 //导入数据
-QMap<char, QList<qreal> * > *SQLExecute::importData(QString tableName)
+QMap<char, QList<qreal> * > SQLExecute::importData(QString tableName)
 {
 	SQLExecute *pInstance = SQLExecute::getInstance();
 
 	QSqlQuery query(*pInstance->db);
 
-	query.exec(QString("SELECT * FROM %1").arg(tableName));
+	query.exec(QString("SELECT * FROM '%1'").arg(tableName));
 
 	QList<qreal> *t = new QList<qreal>;
 	QList<qreal> *x = new QList<qreal>;
@@ -92,12 +92,12 @@ QMap<char, QList<qreal> * > *SQLExecute::importData(QString tableName)
 		z->append(query.value(QString('z')).toReal());
 	}
 
-	QMap<char, QList<qreal> * > *result = new QMap<char, QList<qreal> * >;
+	QMap<char, QList<qreal> * > result;
 
-	result->insert('t', t);
-	result->insert('x', x);
-	result->insert('y', y);
-	result->insert('z', z);
+	result.insert('t', t);
+	result.insert('x', x);
+	result.insert('y', y);
+	result.insert('z', z);
 
 	return result;
 }

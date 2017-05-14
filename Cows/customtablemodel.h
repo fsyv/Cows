@@ -24,6 +24,7 @@ public:
     void addMapping(QString color, QRect area);
     void clearMapping() { m_mapping.clear(); }
     //添加数据
+	void addData(const QMap<char, QList<qreal> * > &data);
     void addData(qreal t, qreal x, qreal y, qreal z);
     void addData(const QList<qreal> &ts, const QList<qreal> &xs, const QList<qreal> &ys, const QList<qreal> &zs);
 

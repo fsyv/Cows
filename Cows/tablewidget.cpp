@@ -3,8 +3,50 @@
 #include "tablewidget.h"
 #include "customtablemodel.h"
 
+TableWidget::TableWidget(const QMap<char, QList<qreal> * > &data, QWidget *parent) :
+	QDialog(parent)
+{
+	m_pModel = new CustomTableModel;
+
+	m_pModel->addData(data);
+
+	m_pTableView = new QTableView;
+	m_pTableView->setModel(m_pModel);
+	m_pTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+	m_pTableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+	m_pChart = new QChart;
+	m_pChart->setAnimationOptions(QChart::AllAnimations);
+
+	axisX = new QValueAxis;
+	axisX->setRange(0, 50);
+	axisX->setTickCount(51);
+	axisX->setLabelFormat("%d");
+
+	axisY = new QValueAxis;
+	axisY->setRange(-50.0, 50.0);
+	axisY->setTickCount(9);
+	axisY->setLabelFormat("%.2f");
+
+	m_pChart->addAxis(axisX, Qt::AlignBottom);
+	m_pChart->addAxis(axisY, Qt::AlignLeft);
+
+	initAxis();
+
+	m_pChartView = new QChartView(m_pChart);
+	m_pChartView->setRenderHint(QPainter::Antialiasing);
+	m_pChartView->setMinimumSize(640, 480);
+
+	m_pGridLayout = new QGridLayout;
+	m_pGridLayout->addWidget(m_pTableView, 1, 0);
+	m_pGridLayout->addWidget(m_pChartView, 1, 1);
+	m_pGridLayout->setColumnStretch(1, 1);
+	m_pGridLayout->setColumnStretch(0, 0);
+	setLayout(m_pGridLayout);
+}
+
 TableWidget::TableWidget(QWidget *parent)
-    : QWidget(parent)
+	: QDialog(parent)
 {
     // create simple model for storing data
     // user's table data model
@@ -47,7 +89,6 @@ TableWidget::TableWidget(QWidget *parent)
     //! [8]
 
 	
-
     //! [9]
     // create main layout
     m_pGridLayout = new QGridLayout;
@@ -69,6 +110,12 @@ TableWidget::~TableWidget()
     delete m_pSeriesY;
     delete m_pSeriesZ;
 }
+
+//void TableWidget::showEvent(QShowEvent *e)
+//{
+//
+//	QDialog::showEvent(e);
+//}
 
 void TableWidget::initAxis()
 {
