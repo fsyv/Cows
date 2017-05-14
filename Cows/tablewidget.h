@@ -14,6 +14,7 @@ namespace QtCharts{
 	class QChartView;
 	class QSplineSeries;
 	class QVXYModelMapper;
+	class QValueAxis;
 }
 
 using namespace QtCharts;
@@ -36,6 +37,8 @@ private:
 	QSplineSeries *m_pSeriesY;
 	QSplineSeries *m_pSeriesZ;
 	QGridLayout *m_pGridLayout;
+	QValueAxis *axisX;
+	QValueAxis *axisY;
 };
 
 QT_END_NAMESPACE

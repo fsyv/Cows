@@ -74,7 +74,7 @@
     </property>
     <addaction name="action_import"/>
     <addaction name="action_import_2"/>
-    <addaction name="action_F"/>
+    <addaction name="action_exit"/>
    </widget>
    <widget class="QMenu" name="menuNFC">
     <property name="title">
@@ -88,7 +88,7 @@
     <property name="title">
      <string>帮助</string>
     </property>
-    <addaction name="action_9"/>
+    <addaction name="action_about"/>
     <addaction name="action_Qt"/>
    </widget>
    <addaction name="menu"/>
@@ -114,7 +114,7 @@
     <string>导入数据</string>
    </property>
   </action>
-  <action name="action_F">
+  <action name="action_exit">
    <property name="icon">
     <iconset resource="resource.qrc">
      <normaloff>:/resource/exit.png</normaloff>:/resource/exit.png</iconset>
@@ -150,7 +150,7 @@
     <string>读取数据</string>
    </property>
   </action>
-  <action name="action_9">
+  <action name="action_about">
    <property name="icon">
     <iconset resource="resource.qrc">
      <normaloff>:/resource/about.png</normaloff>:/resource/about.png</iconset>
