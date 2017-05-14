@@ -7,11 +7,10 @@ QMutex SQLExecute::mutex;
 
 SQLExecute::SQLExecute(QObject *parent) : QObject(parent)
 {
-	db = new QSqlDatabase;
-	db->addDatabase("QSQLITE");
-	db->setDatabaseName("cows.db");
-
-	query = new QSqlQuery(*db);
+	db = new QSqlDatabase();
+	*db = QSqlDatabase::addDatabase(QString("QSQLITE"));
+	db->setDatabaseName(QString("cows.db"));
+	db->open();
 }
 
 SQLExecute::~SQLExecute()
@@ -40,7 +39,9 @@ void SQLExecute::exportData(QString tableName, QMap<char, QList<qreal> * > *data
 {
 	SQLExecute *pInstance = SQLExecute::getInstance();
 
-	pInstance->query->exec(
+	QSqlQuery query(*pInstance->db);
+
+	query.exec(
 		QString("CREATE TABLE IF NOT EXISTS '%1'(%2, %3, %4, %5)") \
 		.arg(tableName) \
 		.arg(QString("t REAL")) \
@@ -49,7 +50,7 @@ void SQLExecute::exportData(QString tableName, QMap<char, QList<qreal> * > *data
 		.arg(QString("z REAL")) \
 		);
 
-	pInstance->query->prepare(QString("INSERT INTO %1 VALUES(?, ?, ?, ?)").arg(tableName));
+	query.prepare(QString("INSERT INTO %1 VALUES(?, ?, ?, ?)").arg(tableName));
 
 	QList<qreal> *t = data->value('t');
 
@@ -57,12 +58,12 @@ void SQLExecute::exportData(QString tableName, QMap<char, QList<qreal> * > *data
 	{
 		for (int i = 0; i < t->count(); ++i)
 		{
-			pInstance->query->bindValue(0, t->at(i));
-			pInstance->query->bindValue(1, data->value('x')->at(i));
-			pInstance->query->bindValue(2, data->value('y')->at(i));
-			pInstance->query->bindValue(3, data->value('z')->at(i));
+			query.bindValue(0, t->at(i));
+			query.bindValue(1, data->value('x')->at(i));
+			query.bindValue(2, data->value('y')->at(i));
+			query.bindValue(3, data->value('z')->at(i));
 
-			pInstance->query->exec();
+			query.exec();
 		}
 	}
 
@@ -74,27 +75,29 @@ QMap<char, QList<qreal> * > *SQLExecute::importData(QString tableName)
 {
 	SQLExecute *pInstance = SQLExecute::getInstance();
 
-	pInstance->query->exec(QString("SELECT * FROM %1").arg(tableName));
+	QSqlQuery query(*pInstance->db);
+
+	query.exec(QString("SELECT * FROM %1").arg(tableName));
 
 	QList<qreal> *t = new QList<qreal>;
 	QList<qreal> *x = new QList<qreal>;
 	QList<qreal> *y = new QList<qreal>;
 	QList<qreal> *z = new QList<qreal>;
 
-	while (pInstance->query->next())
+	while (query.next())
 	{
-		t->append(pInstance->query->value(QString('t')).toReal());
-		x->append(pInstance->query->value(QString('x')).toReal());
-		y->append(pInstance->query->value(QString('y')).toReal());
-		z->append(pInstance->query->value(QString('z')).toReal());
+		t->append(query.value(QString('t')).toReal());
+		x->append(query.value(QString('x')).toReal());
+		y->append(query.value(QString('y')).toReal());
+		z->append(query.value(QString('z')).toReal());
 	}
 
 	QMap<char, QList<qreal> * > *result = new QMap<char, QList<qreal> * >;
 
 	result->insert('t', t);
-	result->insert('t', x);
-	result->insert('t', y);
-	result->insert('t', z);
+	result->insert('x', x);
+	result->insert('y', y);
+	result->insert('z', z);
 
 	return result;
 }
@@ -104,11 +107,13 @@ QStringList SQLExecute::getAllTableName()
 {
 	SQLExecute *pInstance = SQLExecute::getInstance();
 
-	pInstance->query->exec(QString("SELECT name FROM sqlite_master WHERE 'table' order BY name"));
+	QSqlQuery sqlquery(*pInstance->db);
+
+	sqlquery.exec(QString("SELECT name FROM sqlite_master WHERE 'table' order BY name"));
 
 	QStringList tableList;
-	while (pInstance->query->next())
-		tableList.append(pInstance->query->value(0).toString());
+	while (sqlquery.next())
+		tableList.append(sqlquery.value(0).toString());
 
 	return tableList;
 }

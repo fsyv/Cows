@@ -32,8 +32,7 @@ HEADERS += \
     NFCOperator.h \
     sqlexecute.h \
     mainwidget.h \
-    listdatawidget.h \
-    datalistitem.h
+    listdatawidget.h
 
 SOURCES += \
     customtablemodel.cpp \
@@ -44,8 +43,7 @@ SOURCES += \
     stdafx.cpp \
     sqlexecute.cpp \
     mainwidget.cpp \
-    listdatawidget.cpp \
-    datalistitem.cpp
+    listdatawidget.cpp
 
 RC_FILE=Cows.rc
 

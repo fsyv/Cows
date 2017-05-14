@@ -16,5 +16,7 @@ public:
     ~ListDataWidget();
 
 private:
+	void loadData();
+
     Ui::ListDataWidget *ui;
 };

@@ -7,7 +7,6 @@
 QT_BEGIN_NAMESPACE
 
 class QSqlDatabase;
-class QSqlQuery;
 
 class SQLExecute : public QObject
 {
@@ -26,7 +25,6 @@ private:
     explicit SQLExecute(QObject *parent = 0);
 
     QSqlDatabase *db;
-	QSqlQuery *query;
 
     static SQLExecute *getInstance();
     static SQLExecute *m_pInstance;
