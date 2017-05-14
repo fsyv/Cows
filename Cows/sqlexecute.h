@@ -1,5 +1,5 @@
-#ifndef SQLEXECUTE_H
-#define SQLEXECUTE_H
+#pragma once
+#pragma  execution_character_set("utf-8")
 
 #include <QObject>
 #include <QMutex>
@@ -7,6 +7,7 @@
 QT_BEGIN_NAMESPACE
 
 class QSqlDatabase;
+class QSqlQuery;
 
 class SQLExecute : public QObject
 {
@@ -14,21 +15,22 @@ class SQLExecute : public QObject
 public:
     ~SQLExecute();
 
-    //å¯¼å‡ºæ•°æ®
+    //µ¼³öÊı¾İ
 	static void exportData(QString tableName, QMap<char, QList<qreal> * > *data);
-    //å¯¼å…¥æ•°æ®
+    //µ¼ÈëÊı¾İ
 	static QMap<char, QList<qreal> * > *importData(QString tableName);
-	//æŸ¥è¯¢æ‰€æœ‰è¡¨å
+	//²éÑ¯ËùÓĞ±íÃû
 	static QStringList getAllTableName();
 
 private:
     explicit SQLExecute(QObject *parent = 0);
 
     QSqlDatabase *db;
+	QSqlQuery *query;
 
-    SQLExecute *getInstance();
-    SQLExecute *m_pInstance = nullptr;
-    QMutex mutex;
+    static SQLExecute *getInstance();
+    static SQLExecute *m_pInstance;
+    static QMutex mutex;
 
 signals:
 
@@ -37,4 +39,3 @@ public slots:
 
 QT_END_NAMESPACE
 
-#endif // SQLEXECUTE_H
