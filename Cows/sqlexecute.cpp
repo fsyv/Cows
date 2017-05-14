@@ -3,6 +3,7 @@
 #include "sqlexecute.h"
 
 SQLExecute *SQLExecute::m_pInstance = nullptr;
+QMutex SQLExecute::mutex;
 
 SQLExecute::SQLExecute(QObject *parent) : QObject(parent)
 {

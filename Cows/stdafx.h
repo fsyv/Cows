@@ -12,4 +12,5 @@
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QString>
 #include<vector>
