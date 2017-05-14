@@ -109,7 +109,7 @@ QStringList SQLExecute::getAllTableName()
 
 	QSqlQuery sqlquery(*pInstance->db);
 
-	sqlquery.exec(QString("SELECT name FROM sqlite_master WHERE 'table' order BY name"));
+	sqlquery.exec(QString("SELECT name FROM sqlite_master"));
 
 	QStringList tableList;
 	while (sqlquery.next())
