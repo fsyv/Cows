@@ -28,8 +28,8 @@ void DS_fusion::solve(std::vector<double> &x, std::vector<double> &y)
 		return;
 	}
 
-	int size = x.size();
-	for (int i = 0; i < size; ++i)
+	size_t size = x.size();
+	for (size_t i = 0; i < size; ++i)
 	{
 		if (i == size - 1)
 		{

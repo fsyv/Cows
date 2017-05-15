@@ -30,7 +30,9 @@ HEADERS += \
     dll.h \
     DS_fusion.h \
     NFCOperator.h \
-    mainwidget.h
+    sqlexecute.h \
+    mainwidget.h \
+    listdatawidget.h
 
 SOURCES += \
     customtablemodel.cpp \
@@ -39,12 +41,15 @@ SOURCES += \
     DS_fusion.cpp \
     NFCOperator.cpp \
     stdafx.cpp \
-    mainwidget.cpp
+    sqlexecute.cpp \
+    mainwidget.cpp \
+    listdatawidget.cpp
 
 RC_FILE=Cows.rc
 
 FORMS += \
-    MainWindow.ui
+    MainWindow.ui \
+    listdatawidget.ui
 
 RESOURCES += \
     resource.qrc
