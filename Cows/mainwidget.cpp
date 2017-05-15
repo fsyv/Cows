@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "tablewidget.h"
 #include "AboutDialog.h"
+#include "listdatawidget.h"
 #include <QLabel>
 #include <QDebug>
 MainWindow::MainWindow(QWidget *parent) :
@@ -19,6 +20,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 	TableWidget *tw = new TableWidget;
 	ui->stackedWidget->addWidget(tw);
+
+	ListDataWidget *ldw = new ListDataWidget;
+	ui->stackedWidget->addWidget(ldw);
 
 	ui->stackedWidget->setCurrentIndex(0);
 }
@@ -43,6 +47,7 @@ void MainWindow::signalConnect()
 
 	/*********************QToolButton*************************/
 	connect(ui->toolButton_chart, &QToolButton::clicked, this, &MainWindow::showChart);
+	connect(ui->pushButton_history, &QPushButton::clicked, this, &MainWindow::showHistory);
 }
 
 void MainWindow::showChart()
@@ -55,4 +60,9 @@ void MainWindow::showAbout()
 	AboutDialog *about = new AboutDialog(this);
 	about->setModal(true);
 	about->show();
+}
+
+void MainWindow::showHistory()
+{
+	ui->stackedWidget->setCurrentIndex(2);
 }

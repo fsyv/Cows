@@ -30,12 +30,12 @@ void ListDataWidget::loadData()
 
 void ListDataWidget::showData(const QModelIndex &index)
 {
-	hide();
+	//hide();
 	TableWidget tableWidget(
 		SQLExecute::importData(
 		ui->listWidget->item(index.row())->text()
 		)
 		);
 	tableWidget.exec();
-	show();
+	//show();
 }
