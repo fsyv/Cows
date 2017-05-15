@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	ListDataWidget *ldw = new ListDataWidget;
 	ui->stackedWidget->addWidget(ldw);
 
-	ui->stackedWidget->setCurrentIndex(0);
+	ui->stackedWidget->setCurrentIndex(1);
 }
 
 MainWindow::~MainWindow()
@@ -53,6 +53,9 @@ void MainWindow::signalConnect()
 void MainWindow::showChart()
 {
 	ui->stackedWidget->setCurrentIndex(1);
+
+	//ui->pushButton_history->setCheckable(false);
+	//ui->toolButton_nfc->setCheckable(false);
 }
 
 void MainWindow::showAbout()
@@ -65,4 +68,5 @@ void MainWindow::showAbout()
 void MainWindow::showHistory()
 {
 	ui->stackedWidget->setCurrentIndex(2);
+
 }
