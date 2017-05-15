@@ -121,7 +121,7 @@ font:20px;</string>
     <property name="title">
      <string>文件</string>
     </property>
-    <addaction name="action_import"/>
+    <addaction name="action_export"/>
     <addaction name="action_import_2"/>
     <addaction name="action_exit"/>
    </widget>
@@ -145,7 +145,7 @@ font:20px;</string>
    <addaction name="menu_2"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="action_import">
+  <action name="action_export">
    <property name="icon">
     <iconset resource="resource.qrc">
      <normaloff>:/resource/export.png</normaloff>:/resource/export.png</iconset>

@@ -1,10 +1,12 @@
-﻿#include "mainwidget.h"
+﻿#include "stdafx.h"
+
+#include "mainwidget.h"
 #include "ui_mainwindow.h"
 #include "tablewidget.h"
 #include "AboutDialog.h"
 #include "listdatawidget.h"
-#include <QLabel>
-#include <QDebug>
+#include "sqlexecute.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -48,6 +50,9 @@ void MainWindow::signalConnect()
 	/*********************QToolButton*************************/
 	connect(ui->toolButton_chart, &QToolButton::clicked, this, &MainWindow::showChart);
 	connect(ui->pushButton_history, &QPushButton::clicked, this, &MainWindow::showHistory);
+
+	//导出数据action
+	connect(ui->action_export, &QAction::triggered, this, &MainWindow::exportData);
 }
 
 void MainWindow::showChart()
@@ -65,4 +70,36 @@ void MainWindow::showAbout()
 void MainWindow::showHistory()
 {
 	ui->stackedWidget->setCurrentIndex(2);
+}
+
+void MainWindow::exportData()
+{
+	bool ok = false;
+	loop:
+	QString name = QInputDialog::getText(nullptr, "保存数据", "请输入保存的名字：", QLineEdit::Normal, QString(), &ok);
+
+	if (ok)
+	{
+		QString table = QString("%1_%2").arg(QDate::currentDate().toString("yyyy-MM-dd")).arg(name);
+
+		if (SQLExecute::getAllTableName().contains(table))
+		{
+			//保存的表中已经包含了这个表
+			if (QMessageBox::Ok == QMessageBox::question(nullptr, "提示", "名字已经存在，是否继续保存？"))
+			{
+
+			}
+			else
+			{
+				//大返回
+				goto loop;
+			}
+		}
+
+		SQLExecute::exportData(table, nullptr);
+	}
+	else
+	{
+
+	}
 }

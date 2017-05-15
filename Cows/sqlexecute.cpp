@@ -37,6 +37,9 @@ SQLExecute *SQLExecute::getInstance()
 //导出数据
 void SQLExecute::exportData(QString tableName, QMap<char, QList<qreal> * > *data)
 {
+	if (!data)
+		return;
+
 	SQLExecute *pInstance = SQLExecute::getInstance();
 
 	QSqlQuery query(*pInstance->db);

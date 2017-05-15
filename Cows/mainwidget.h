@@ -19,6 +19,7 @@ protected slots:
 	void showChart();
 	void showAbout();
 	void showHistory();
+	void exportData();
 private:
 
 	void signalConnect();
