@@ -14,8 +14,6 @@ ListDataWidget::ListDataWidget(QWidget *parent) :
     ui->setupUi(this);
 
 	connect(ui->listWidget, &QListWidget::doubleClicked, this, &ListDataWidget::showData);
-
-	loadData();
 }
 
 ListDataWidget::~ListDataWidget()
@@ -23,9 +21,20 @@ ListDataWidget::~ListDataWidget()
     delete ui;
 }
 
+void ListDataWidget::showEvent(QShowEvent *e)
+{
+	clearData();
+	loadData();
+}
+
 void ListDataWidget::loadData()
 {
 	ui->listWidget->addItems(SQLExecute::getAllTableName());
+}
+
+void ListDataWidget::clearData()
+{
+	ui->listWidget->clear();
 }
 
 void ListDataWidget::showData(const QModelIndex &index)

@@ -20,18 +20,32 @@ MainWindow::MainWindow(QWidget *parent) :
 	//移除一个多余的没有用的窗体
 	ui->stackedWidget->removeWidget(ui->stackedWidget->widget(1));
 
-	TableWidget *tw = new TableWidget;
+	tw = new TableWidget;
 	ui->stackedWidget->addWidget(tw);
 
 	ListDataWidget *ldw = new ListDataWidget;
 	ui->stackedWidget->addWidget(ldw);
 
 	ui->stackedWidget->setCurrentIndex(1);
+
+	startTimer(1000);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::timerEvent(QTimerEvent *e)
+{
+	static int i = 0;
+	tw->getTableModel()->addData(qreal(i), 
+		QDateTime::currentDateTime().currentMSecsSinceEpoch() * i % qrand() % 100,
+		QDateTime::currentDateTime().currentMSecsSinceEpoch() * i % qrand() % 100,
+		QDateTime::currentDateTime().currentMSecsSinceEpoch() * i % qrand() % 100
+		);
+
+	i++;
 }
 
 void MainWindow::signalConnect()
@@ -88,18 +102,14 @@ void MainWindow::exportData()
 		if (SQLExecute::getAllTableName().contains(table))
 		{
 			//保存的表中已经包含了这个表
-			if (QMessageBox::Ok == QMessageBox::question(nullptr, "提示", "名字已经存在，是否继续保存？"))
-			{
-
-			}
-			else
+			if (QMessageBox::Cancel == QMessageBox::question(nullptr, "提示", "名字已经存在，是否追加数据？"))
 			{
 				//大返回
 				goto loop;
 			}
 		}
 
-		SQLExecute::exportData(table, nullptr);
+		SQLExecute::exportData(table, tw->getTableModel()->getData());
 	}
 	else
 	{

@@ -15,10 +15,14 @@ public:
 	explicit ListDataWidget(QWidget *parent = 0);
 	~ListDataWidget();
 
+protected:
+	void showEvent(QShowEvent *e);
+
 private slots :
 	void showData(const QModelIndex &index);
 
 private:
+	void clearData();
 	void loadData();
 
 	Ui::ListDataWidget *ui;

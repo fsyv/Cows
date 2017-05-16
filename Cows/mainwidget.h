@@ -7,6 +7,8 @@ namespace Ui {
 class MainWindow;
 }
 
+class TableWidget;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -14,6 +16,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+protected:
+	void timerEvent(QTimerEvent *e);
 
 protected slots:
 	void showChart();
@@ -25,6 +30,8 @@ private:
 	void signalConnect();
 
     Ui::MainWindow *ui;
+
+	TableWidget *tw;
 };
 
 #endif // MAINWINDOW_H

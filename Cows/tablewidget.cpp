@@ -1,7 +1,6 @@
 #include "stdafx.h"
 
 #include "tablewidget.h"
-#include "customtablemodel.h"
 
 TableWidget::TableWidget(const QMap<char, QList<qreal> * > &data, QWidget *parent) :
 	QDialog(parent)
@@ -18,21 +17,22 @@ TableWidget::TableWidget(const QMap<char, QList<qreal> * > &data, QWidget *paren
 	m_pChart = new QChart;
 	m_pChart->setAnimationOptions(QChart::AllAnimations);
 
-	axisX = new QValueAxis;
-	axisX->setRange(0, 50);
-	axisX->setTickCount(51);
-	axisX->setLabelFormat("%d");
+	//axisX = new QValueAxis;
+	//axisX->setRange(0, 50);
+	//axisX->setTickCount(51);
+	//axisX->setLabelFormat("%d");
 
-	axisY = new QValueAxis;
-	axisY->setRange(-50.0, 50.0);
-	axisY->setTickCount(9);
-	axisY->setLabelFormat("%.2f");
+	//axisY = new QValueAxis;
+	//axisY->setRange(-50.0, 50.0);
+	//axisY->setTickCount(9);
+	//axisY->setLabelFormat("%.2f");
 
-	m_pChart->addAxis(axisX, Qt::AlignBottom);
-	m_pChart->addAxis(axisY, Qt::AlignLeft);
+	//m_pChart->addAxis(axisX, Qt::AlignBottom);
+	//m_pChart->addAxis(axisY, Qt::AlignLeft);
 
 	initAxis();
 
+	m_pChart->createDefaultAxes();
 	m_pChartView = new QChartView(m_pChart);
 	m_pChartView->setRenderHint(QPainter::Antialiasing);
 	m_pChartView->setMinimumSize(640, 480);
@@ -66,18 +66,18 @@ TableWidget::TableWidget(QWidget *parent)
 	m_pChart = new QChart;
 	m_pChart->setAnimationOptions(QChart::AllAnimations);
     //! [3]
-	axisX = new QValueAxis;
-	axisX->setRange(0, 50);
-	axisX->setTickCount(51);
-	axisX->setLabelFormat("%d");
+	//axisX = new QValueAxis;
+	//axisX->setRange(0, 50);
+	//axisX->setTickCount(51);
+	//axisX->setLabelFormat("%d");
 
-	axisY = new QValueAxis;
-	axisY->setRange(-50.0, 50.0);
-	axisY->setTickCount(9);
-	axisY->setLabelFormat("%.2f");
+	//axisY = new QValueAxis;
+	//axisY->setRange(-50.0, 50.0);
+	//axisY->setTickCount(9);
+	//axisY->setLabelFormat("%.2f");
 
-	m_pChart->addAxis(axisX, Qt::AlignBottom);
-	m_pChart->addAxis(axisY, Qt::AlignLeft);
+	//m_pChart->addAxis(axisX, Qt::AlignBottom);
+	//m_pChart->addAxis(axisY, Qt::AlignLeft);
 
 	initAxis();
 	
@@ -111,6 +111,11 @@ TableWidget::~TableWidget()
     delete m_pSeriesZ;
 }
 
+CustomTableModel *TableWidget::getTableModel()
+{
+	return m_pModel;
+}
+
 //void TableWidget::showEvent(QShowEvent *e)
 //{
 //
@@ -129,8 +134,8 @@ void TableWidget::initAxis()
 	mapper->setModel(m_pModel);
 	
 	m_pChart->addSeries(m_pSeriesX);
-	m_pChart->setAxisX(axisX, m_pSeriesX);
-	m_pChart->setAxisY(axisY, m_pSeriesX);
+	//m_pChart->setAxisX(axisX, m_pSeriesX);
+	//m_pChart->setAxisY(axisY, m_pSeriesX);
 
 	
 
@@ -150,8 +155,8 @@ void TableWidget::initAxis()
 	mapper->setSeries(m_pSeriesY);
 	mapper->setModel(m_pModel);
 	m_pChart->addSeries(m_pSeriesY);
-	m_pChart->setAxisX(axisX, m_pSeriesY);
-	m_pChart->setAxisY(axisY, m_pSeriesY);
+	//m_pChart->setAxisX(axisX, m_pSeriesY);
+	//m_pChart->setAxisY(axisY, m_pSeriesY);
 	
 
 	seriesColorHex = "#" + QString::number(m_pSeriesY->pen().color().rgb(), 16).right(6).toUpper();
@@ -167,8 +172,8 @@ void TableWidget::initAxis()
 	mapper->setSeries(m_pSeriesZ);
 	mapper->setModel(m_pModel);
 	m_pChart->addSeries(m_pSeriesZ);
-	m_pChart->setAxisX(axisX, m_pSeriesZ);
-	m_pChart->setAxisY(axisY, m_pSeriesZ);
+	//m_pChart->setAxisX(axisX, m_pSeriesZ);
+	//m_pChart->setAxisY(axisY, m_pSeriesZ);
 
 	seriesColorHex = "#" + QString::number(m_pSeriesZ->pen().color().rgb(), 16).right(6).toUpper();
 	m_pModel->addMapping(seriesColorHex, QRect(3, 0, 1, m_pModel->rowCount()));

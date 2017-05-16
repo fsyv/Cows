@@ -91,6 +91,8 @@ void CustomTableModel::addData(const QMap<char, QList<qreal> * > &data)
 
 void CustomTableModel::addData(qreal t, qreal x, qreal y, qreal z)
 {
+	insertRow(rowCount());
+
     m_data->value('t')->append(t);
     m_data->value('x')->append(x);
     m_data->value('y')->append(y);
@@ -99,8 +101,15 @@ void CustomTableModel::addData(qreal t, qreal x, qreal y, qreal z)
 
 void CustomTableModel::addData(const QList<qreal> &ts, const QList<qreal> &xs, const QList<qreal> &ys, const QList<qreal> &zs)
 {
+	insertRows(rowCount(), ts.count());
+
     m_data->value('t')->append(ts);
     m_data->value('x')->append(xs);
     m_data->value('y')->append(ys);
     m_data->value('z')->append(zs);
+}
+
+QMap<char, QList<qreal> * > *CustomTableModel::getData() const
+{
+	return m_data;
 }
