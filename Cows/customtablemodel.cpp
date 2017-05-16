@@ -91,25 +91,43 @@ void CustomTableModel::addData(const QMap<char, QList<qreal> * > &data)
 
 void CustomTableModel::addData(qreal t, qreal x, qreal y, qreal z)
 {
-	insertRow(rowCount());
+	int keep = rowCount();
 
     m_data->value('t')->append(t);
     m_data->value('x')->append(x);
     m_data->value('y')->append(y);
     m_data->value('z')->append(z);
+
+	insertRow(keep);
 }
 
 void CustomTableModel::addData(const QList<qreal> &ts, const QList<qreal> &xs, const QList<qreal> &ys, const QList<qreal> &zs)
 {
-	insertRows(rowCount(), ts.count());
+	int keep = rowCount();
 
     m_data->value('t')->append(ts);
     m_data->value('x')->append(xs);
     m_data->value('y')->append(ys);
     m_data->value('z')->append(zs);
+
+	insertRows(keep, ts.count());
 }
 
 QMap<char, QList<qreal> * > *CustomTableModel::getData() const
 {
 	return m_data;
+}
+
+bool CustomTableModel::insertRows(int row, int count, const QModelIndex &parent)
+{
+	bool state = QAbstractTableModel::insertRows(row, count, parent);
+	for (int i = 0; i < count; ++i)
+	{
+		data(index(row + i, 0), Qt::DisplayRole);
+		//dataChanged(index(row + i, 0), index(row + i, 0));
+		//dataChanged(index(row + i, 1), index(row + i, 1));
+		//dataChanged(index(row + i, 2), index(row + i, 2));
+		//dataChanged(index(row + i, 3), index(row + i, 3));
+	}
+	return state;
 }

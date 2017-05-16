@@ -28,6 +28,8 @@ public:
     void addData(qreal t, qreal x, qreal y, qreal z);
     void addData(const QList<qreal> &ts, const QList<qreal> &xs, const QList<qreal> &ys, const QList<qreal> &zs);
 
+	bool insertRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
+
 	QMap<char, QList<qreal> * > *getData() const;
 
 private:
