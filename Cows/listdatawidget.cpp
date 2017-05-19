@@ -40,11 +40,11 @@ void ListDataWidget::clearData()
 void ListDataWidget::showData(const QModelIndex &index)
 {
 	//hide();
-	TableWidget tableWidget(
+	/*TableWidget tableWidget(
 		SQLExecute::importData(
 		ui->listWidget->item(index.row())->text()
 		)
 		);
-	tableWidget.exec();
+	tableWidget.exec();*/
 	//show();
 }

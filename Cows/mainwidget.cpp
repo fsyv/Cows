@@ -65,7 +65,7 @@ void MainWindow::loadExcel(QList<qreal> &t, QList<qreal> &x, QList<qreal> &y, QL
 void MainWindow::calculatData(QList<qreal> &t, QList<qreal> &x, QList<qreal> &y, QList<qreal> &z)
 {
     //通过x, y求出来d
-    DS_fusion::solve(x, y);
+   // DS_fusion::solve(x, y);
 }
 
 void MainWindow::showChart()

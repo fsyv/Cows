@@ -34,6 +34,7 @@ public:
 
 private:
 	void initAxis();
+	void destroyAxis();
 
 	CustomTableModel *m_pModel;
 	QChart *m_pChart;

@@ -10,13 +10,7 @@ TableWidget::TableWidget(QWidget *parent)
 
 TableWidget::~TableWidget()
 {
-    delete m_pModel;
-    delete m_pTableView;
-    delete m_pChart;
-    delete m_pChartView;
-    delete m_pSeriesX;
-    delete m_pSeriesY;
-    delete m_pSeriesZ;
+
 }
 
 CustomTableModel *TableWidget::getTableModel()
@@ -121,3 +115,13 @@ void TableWidget::initAxis()
 	m_pModel->addMapping(seriesColorHex, QRect(3, 0, 1, m_pModel->rowCount()));
 }
 
+void TableWidget::destroyAxis()
+{
+	delete m_pModel;
+	delete m_pTableView;
+	delete m_pChart;
+	delete m_pChartView;
+	delete m_pSeriesX;
+	delete m_pSeriesY;
+	delete m_pSeriesZ;
+}
