@@ -136,7 +136,7 @@ font:20px;</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -144,7 +144,7 @@ font:20px;</string>
      <string>文件</string>
     </property>
     <addaction name="action_export"/>
-    <addaction name="action_import_2"/>
+    <addaction name="action_import"/>
     <addaction name="action_exit"/>
    </widget>
    <widget class="QMenu" name="menuNFC">
@@ -176,7 +176,7 @@ font:20px;</string>
     <string>导出数据</string>
    </property>
   </action>
-  <action name="action_import_2">
+  <action name="action_import">
    <property name="icon">
     <iconset resource="resource.qrc">
      <normaloff>:/resource/import.png</normaloff>:/resource/import.png</iconset>

@@ -23,11 +23,11 @@ class TableWidget : public QDialog
 {
     Q_OBJECT
 public:
-	TableWidget(const QMap<char, QList<qreal> * > &data, QWidget *parent = 0);
     TableWidget(QWidget *parent = 0);
     ~TableWidget();
 
 	CustomTableModel *getTableModel();
+    void addData(const QList<qreal> &t, const QList<qreal> &x, const QList<qreal> &y, const QList<qreal> &z);
 
 //protected:
 //	void showEvent(QShowEvent *e);

@@ -27,25 +27,11 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->stackedWidget->addWidget(ldw);
 
 	ui->stackedWidget->setCurrentIndex(1);
-
-	startTimer(1000);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-}
-
-void MainWindow::timerEvent(QTimerEvent *e)
-{
-	static int i = 0;
-	tw->getTableModel()->addData(qreal(i), 
-		QDateTime::currentDateTime().currentMSecsSinceEpoch() * i % qrand() % 100,
-		QDateTime::currentDateTime().currentMSecsSinceEpoch() * i % qrand() % 100,
-		QDateTime::currentDateTime().currentMSecsSinceEpoch() * i % qrand() % 100
-		);
-
-	i++;
 }
 
 void MainWindow::signalConnect()
@@ -67,6 +53,19 @@ void MainWindow::signalConnect()
 
 	//导出数据action
 	connect(ui->action_export, &QAction::triggered, this, &MainWindow::exportData);
+    //导入数据action
+    connect(ui->action_import, &QAction::triggered, this, &MainWindow::importData);
+}
+
+void MainWindow::loadExcel(QList<qreal> &t, QList<qreal> &x, QList<qreal> &y, QList<qreal> &z)
+{
+
+}
+
+void MainWindow::calculatData(QList<qreal> &t, QList<qreal> &x, QList<qreal> &y, QList<qreal> &z)
+{
+    //通过x, y求出来d
+    DS_fusion::solve(x, y);
 }
 
 void MainWindow::showChart()
@@ -114,5 +113,19 @@ void MainWindow::exportData()
 	else
 	{
 
-	}
+    }
+}
+
+void MainWindow::importData()
+{
+    QList<qreal> t;
+    QList<qreal> x;
+    QList<qreal> y;
+    QList<qreal> z;
+    //加载数据
+    loadExcel(t, x, y, z);
+    //计算
+    calculatData(t, x, y, z);
+    //展示
+    tw->addData(t, x, y, z);
 }

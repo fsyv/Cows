@@ -21,3 +21,4 @@
 
 
 #include "customtablemodel.h"
+#include "DS_fusion.h"
