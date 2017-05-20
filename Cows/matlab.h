@@ -3,6 +3,8 @@
 
 #include <QList>
 
+typedef qreal real_t;
+
 class Matlab
 {
 public:
@@ -15,7 +17,29 @@ public:
     % m(空集)肯定是0
     */
     //nx为x数组的长度
-    static void DS_fusion(QList<qreal> &x, QList<qreal> &y);
+    static void DS_fusion(QList<real_t> &x, QList<real_t> &y);
+
+    //求均值
+    static real_t CalcAverage(const QList<real_t> &numbers);
+
+    /*
+    //求零均值序列
+    // numbers : 需要转换的序列
+    // aver这组序列的均值
+    */
+    static void NorAverageSequence(QList<real_t> &numbers, real_t aver);
+
+    //前向差分
+    static void ForwardDifference(QList<real_t> &numbers);
+
+    //标准差  Standard Deviation
+    static real_t CalcStandardDeviation(const QList<real_t> &numbers);
+
+    //极差   全距(Range)，又称极差
+    static real_t CalcRange(const QList<real_t> &numbers);
+
+    //峰度   Kurtosis
+    static real_t CalcKurtosis(const QList<real_t> &numbers);
 };
 
 #endif // MATLAB_H
