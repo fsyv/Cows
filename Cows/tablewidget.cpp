@@ -3,7 +3,7 @@
 #include "tablewidget.h"
 
 TableWidget::TableWidget(QWidget *parent)
-	: QDialog(parent)
+    : QDialog(parent)
 {
 
 }
@@ -58,70 +58,83 @@ void TableWidget::addData(const QList<qreal> &t, const QList<qreal> &x, const QL
     setLayout(m_pGridLayout);
 }
 
+void TableWidget::calculatData(const QList<qreal> &z)
+{
+    QList<qreal> s = Matlab::NorAverageSequence(z);
+    Matlab::ForwardDifference(s);
+    QList<real_t> a = Matlab::AnalysisCredibilityDependS(Matlab::CalcStandardDeviation(s));
+    QList<real_t> b = Matlab::AnalysisCredibilityDependRange(Matlab::CalcRange(s));
+    QList<real_t> c = Matlab::AnalysisCredibilityDependKurtosis(Matlab::CalcKurtosis(s));
+    QList<real_t> d = Matlab::DS_fusion(Matlab::DS_fusion(a, b), Matlab::DS_fusion(a, c));
+
+    //需要保存的状态
+    Matlab::CalcCowState(d);
+}
+
 void TableWidget::initAxis()
 {
-	// X曲线
-	m_pSeriesX = new QSplineSeries;
-	m_pSeriesX->setName("X");
-	QVXYModelMapper *mapper = new QVXYModelMapper(this);
-	mapper->setXColumn(0);
-	mapper->setYColumn(1);
-	mapper->setSeries(m_pSeriesX);
-	mapper->setModel(m_pModel);
-	
-	m_pChart->addSeries(m_pSeriesX);
-	//m_pChart->setAxisX(axisX, m_pSeriesX);
-	//m_pChart->setAxisY(axisY, m_pSeriesX);
+    // X曲线
+    m_pSeriesX = new QSplineSeries;
+    m_pSeriesX->setName("X");
+    QVXYModelMapper *mapper = new QVXYModelMapper(this);
+    mapper->setXColumn(0);
+    mapper->setYColumn(1);
+    mapper->setSeries(m_pSeriesX);
+    mapper->setModel(m_pModel);
 
-	
+    m_pChart->addSeries(m_pSeriesX);
+    //m_pChart->setAxisX(axisX, m_pSeriesX);
+    //m_pChart->setAxisY(axisY, m_pSeriesX);
 
-	QString seriesColorHex = "#000000";
 
-	// get the color of the series and use it for showing the mapped area
-	seriesColorHex = "#" + QString::number(m_pSeriesX->pen().color().rgb(), 16).right(6).toUpper();
-	m_pModel->addMapping(seriesColorHex, QRect(1, 0, 1, m_pModel->rowCount()));
 
-	// Y曲线
-	m_pSeriesY = new QSplineSeries;
-	m_pSeriesY->setName("Y");
+    QString seriesColorHex = "#000000";
 
-	mapper = new QVXYModelMapper(this);
-	mapper->setXColumn(0);
-	mapper->setYColumn(2);
-	mapper->setSeries(m_pSeriesY);
-	mapper->setModel(m_pModel);
-	m_pChart->addSeries(m_pSeriesY);
-	//m_pChart->setAxisX(axisX, m_pSeriesY);
-	//m_pChart->setAxisY(axisY, m_pSeriesY);
-	
+    // get the color of the series and use it for showing the mapped area
+    seriesColorHex = "#" + QString::number(m_pSeriesX->pen().color().rgb(), 16).right(6).toUpper();
+    m_pModel->addMapping(seriesColorHex, QRect(1, 0, 1, m_pModel->rowCount()));
 
-	seriesColorHex = "#" + QString::number(m_pSeriesY->pen().color().rgb(), 16).right(6).toUpper();
-	m_pModel->addMapping(seriesColorHex, QRect(2, 0, 1, m_pModel->rowCount()));
+    // Y曲线
+    m_pSeriesY = new QSplineSeries;
+    m_pSeriesY->setName("Y");
 
-	// Z曲线
-	m_pSeriesZ = new QSplineSeries;
-	m_pSeriesZ->setName("Z");
+    mapper = new QVXYModelMapper(this);
+    mapper->setXColumn(0);
+    mapper->setYColumn(2);
+    mapper->setSeries(m_pSeriesY);
+    mapper->setModel(m_pModel);
+    m_pChart->addSeries(m_pSeriesY);
+    //m_pChart->setAxisX(axisX, m_pSeriesY);
+    //m_pChart->setAxisY(axisY, m_pSeriesY);
 
-	mapper = new QVXYModelMapper(this);
-	mapper->setXColumn(0);
-	mapper->setYColumn(3);
-	mapper->setSeries(m_pSeriesZ);
-	mapper->setModel(m_pModel);
-	m_pChart->addSeries(m_pSeriesZ);
-	//m_pChart->setAxisX(axisX, m_pSeriesZ);
-	//m_pChart->setAxisY(axisY, m_pSeriesZ);
 
-	seriesColorHex = "#" + QString::number(m_pSeriesZ->pen().color().rgb(), 16).right(6).toUpper();
-	m_pModel->addMapping(seriesColorHex, QRect(3, 0, 1, m_pModel->rowCount()));
+    seriesColorHex = "#" + QString::number(m_pSeriesY->pen().color().rgb(), 16).right(6).toUpper();
+    m_pModel->addMapping(seriesColorHex, QRect(2, 0, 1, m_pModel->rowCount()));
+
+    // Z曲线
+    m_pSeriesZ = new QSplineSeries;
+    m_pSeriesZ->setName("Z");
+
+    mapper = new QVXYModelMapper(this);
+    mapper->setXColumn(0);
+    mapper->setYColumn(3);
+    mapper->setSeries(m_pSeriesZ);
+    mapper->setModel(m_pModel);
+    m_pChart->addSeries(m_pSeriesZ);
+    //m_pChart->setAxisX(axisX, m_pSeriesZ);
+    //m_pChart->setAxisY(axisY, m_pSeriesZ);
+
+    seriesColorHex = "#" + QString::number(m_pSeriesZ->pen().color().rgb(), 16).right(6).toUpper();
+    m_pModel->addMapping(seriesColorHex, QRect(3, 0, 1, m_pModel->rowCount()));
 }
 
 void TableWidget::destroyAxis()
 {
-	delete m_pModel;
-	delete m_pTableView;
-	delete m_pChart;
-	delete m_pChartView;
-	delete m_pSeriesX;
-	delete m_pSeriesY;
-	delete m_pSeriesZ;
+    delete m_pModel;
+    delete m_pTableView;
+    delete m_pChart;
+    delete m_pChartView;
+    delete m_pSeriesX;
+    delete m_pSeriesY;
+    delete m_pSeriesZ;
 }

@@ -57,17 +57,6 @@ void MainWindow::signalConnect()
     connect(ui->action_import, &QAction::triggered, this, &MainWindow::importData);
 }
 
-void MainWindow::loadExcel(QList<qreal> &t, QList<qreal> &x, QList<qreal> &y, QList<qreal> &z)
-{
-
-}
-
-void MainWindow::calculatData(QList<qreal> &t, QList<qreal> &x, QList<qreal> &y, QList<qreal> &z)
-{
-    //通过x, y求出来d
-   // DS_fusion::solve(x, y);
-}
-
 void MainWindow::showChart()
 {
 	ui->stackedWidget->setCurrentIndex(1);
@@ -118,14 +107,5 @@ void MainWindow::exportData()
 
 void MainWindow::importData()
 {
-    QList<qreal> t;
-    QList<qreal> x;
-    QList<qreal> y;
-    QList<qreal> z;
-    //加载数据
-    loadExcel(t, x, y, z);
-    //计算
-    calculatData(t, x, y, z);
-    //展示
-    tw->addData(t, x, y, z);
+
 }

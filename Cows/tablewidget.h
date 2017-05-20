@@ -29,6 +29,8 @@ public:
 	CustomTableModel *getTableModel();
     void addData(const QList<qreal> &t, const QList<qreal> &x, const QList<qreal> &y, const QList<qreal> &z);
 
+    void calculatData(const QList<qreal> &z);
+
 //protected:
 //	void showEvent(QShowEvent *e);
 

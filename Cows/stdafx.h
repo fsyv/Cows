@@ -22,3 +22,4 @@
 
 #include "customtablemodel.h"
 #include "matlab.h"
+#include "cowsstate.h"

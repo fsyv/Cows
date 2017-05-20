@@ -19,10 +19,13 @@ real_t Matlab::CalcAverage(const QList<real_t> &numbers)
 // numbers : 需要转换的序列
 // aver这组序列的均值
 */
-void Matlab::NorAverageSequence(QList<real_t> &numbers, real_t aver)
+auto Matlab::NorAverageSequence(const QList<real_t> &numbers)->decltype(numbers)
 {
+    QList<real_t> s;
+    real_t aver = CalcAverage(numbers);
     for(int i = 0; i < numbers.size(); ++i)
-        numbers[i] -= aver;
+        s.append(numbers[i] - aver);
+    return s;
 }
 
 //前向差分

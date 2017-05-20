@@ -26,9 +26,6 @@ protected slots:
 private:
 	void signalConnect();
 
-    void loadExcel(QList<qreal> &t, QList<qreal> &x, QList<qreal> &y, QList<qreal> &z);
-    void calculatData(QList<qreal> &t, QList<qreal> &x, QList<qreal> &y, QList<qreal> &z);
-
     Ui::MainWindow *ui;
 
 	TableWidget *tw;

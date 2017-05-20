@@ -24,7 +24,7 @@ public:
     // numbers : 需要转换的序列
     // aver这组序列的均值
     */
-    static void NorAverageSequence(QList<real_t> &numbers, real_t aver);
+    static auto NorAverageSequence(const QList<real_t> &numbers)->decltype(numbers);
 
     //前向差分
     static void ForwardDifference(QList<real_t> &numbers);
