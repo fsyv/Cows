@@ -6,6 +6,8 @@
 
 QT       += charts sql serialport
 
+QMAKE_CXXFLAGS += -std=c++11
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Cows
@@ -33,7 +35,8 @@ HEADERS += \
     mainwidget.h \
     listdatawidget.h \
     AboutDialog.h \
-    matlab.h
+    matlab.h \
+    cowsstate.h
 
 SOURCES += \
     customtablemodel.cpp \
@@ -45,7 +48,8 @@ SOURCES += \
     mainwidget.cpp \
     listdatawidget.cpp \
     AboutDialog.cpp \
-    matlab.cpp
+    matlab.cpp \
+    cowsstate.cpp
 
 RC_FILE=Cows.rc
 

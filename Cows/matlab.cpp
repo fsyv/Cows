@@ -5,40 +5,6 @@ Matlab::Matlab()
 
 }
 
-void Matlab::DS_fusion(QList<real_t> &x, QList<real_t> &y)
-{
-    double temp = 0.0;
-
-    if (x.size() != y.size())
-    {
-        return;
-    }
-
-    int size = x.size();
-    for (int i = 0; i < size; ++i)
-    {
-        if (i == size - 1)
-        {
-            x[i] = x[i] * y[i];
-        }
-        else
-        {
-            x[i] = x[i] * y[i] + x[i] * y[size - 1] + y[i] * x[size - 1];
-        }
-        temp = temp + x[i];
-    }
-
-    //排除异常情况
-    //如果temp等于0，给它赋值为一个很小的数
-    temp = temp != 0 ? temp : 0.00000001;
-
-    for (int i = 0; i < size - 1; ++i)
-    {
-        x[i] = x[i] / temp;
-    }
-    x[size - 1] = 0.0;
-}
-
 //求均值
 real_t Matlab::CalcAverage(const QList<real_t> &numbers)
 {
@@ -86,6 +52,9 @@ real_t Matlab::CalcStandardDeviation(const QList<real_t> &numbers)
 //极差   全距(Range)，又称极差
 real_t Matlab::CalcRange(const QList<real_t> &numbers)
 {
+    if(!numbers.size())
+        return 0.0;
+
     real_t max = 0.0;
     real_t min = numbers.first();
 
@@ -223,3 +192,90 @@ QList<real_t> Matlab::AnalysisCredibilityDependKurtosis(const real_t &kurtosis)
 
     return m;
 }
+
+auto Matlab::DS_fusion(const QList<real_t> &x, const QList<real_t> &y)->decltype(y)
+{
+    QList<real_t> d;
+
+    if (x.size() != y.size())
+    {
+        return d;
+    }
+
+    real_t temp = 0.0;
+
+    int size = x.size();
+    for (int i = 0; i < size; ++i)
+    {
+        if (i == size - 1)
+        {
+            d.append(x[i] * y[i]);
+        }
+        else
+        {
+            d.append(x[i] * y[i] + x[i] * y[size - 1] + y[i] * x[size - 1]);
+        }
+        temp = temp + d[i];
+    }
+
+    //排除异常情况
+    //如果temp等于0，给它赋值为一个很小的数
+    temp = temp != 0 ? temp : 0.00000001;
+
+    for (int i = 0; i < size - 1; ++i)
+    {
+        d[i] = d[i] / temp;
+    }
+    d[size - 1] = 0.0;
+
+    return d;
+}
+
+CowsState::State Matlab::CalcCowState(const QList<real_t> &d)
+{
+    if(d.size() != 3)
+        return CowsState::State::NoState;
+
+    if(d[0] - d[1] > epsilon1 && d[2] < epsilon2)
+    {
+        //行走
+        return CowsState::State::Walking;
+    }
+    else if(d[1] - d[0] > epsilon1 && d[2] < epsilon2)
+    {
+        //奔跑
+        return CowsState::State::Running;
+    }
+    else
+    {
+        //不能判断出状态
+        return CowsState::State::NoState;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
