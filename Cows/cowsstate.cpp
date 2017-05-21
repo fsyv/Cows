@@ -5,12 +5,22 @@ CowsState::CowsState(State state)
     m_eState = state;
 }
 
-CowsState::CowsState(CowsState &cow)
+CowsState::CowsState(const CowsState &cow)
 {
-    m_eState = cow.getState();
+	m_eState = cow.getState();
 }
 
-auto CowsState::getState()->decltype(m_eState) const
+CowsState::CowsState(const CowsState *cow)
+{
+	m_eState = cow->getState();
+}
+
+CowsState::~CowsState()
+{
+
+}
+
+CowsState::State CowsState::getState() const
 {
     return m_eState;
 }

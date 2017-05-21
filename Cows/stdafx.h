@@ -24,6 +24,5 @@
 #include <windows.h>
 #include <dbt.h>
 
-#include "customtablemodel.h"
 #include "matlab.h"
 #include "cowsstate.h"

@@ -1,5 +1,4 @@
 #include <QApplication>
-#include "tablewidget.h"
 #include "mainwidget.h"
 #include "listdatawidget.h"
 #include "RealTimeCurveQChartWidget.h"

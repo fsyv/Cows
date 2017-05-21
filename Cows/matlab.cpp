@@ -19,7 +19,7 @@ real_t Matlab::CalcAverage(const QList<real_t> &numbers)
 // numbers : 需要转换的序列
 // aver这组序列的均值
 */
-auto Matlab::NorAverageSequence(const QList<real_t> &numbers)->decltype(numbers)
+QList<real_t> Matlab::NorAverageSequence(const QList<real_t> &numbers)
 {
     QList<real_t> s;
     real_t aver = CalcAverage(numbers);
@@ -196,7 +196,7 @@ QList<real_t> Matlab::AnalysisCredibilityDependKurtosis(const real_t &kurtosis)
     return m;
 }
 
-auto Matlab::DS_fusion(const QList<real_t> &x, const QList<real_t> &y)->decltype(y)
+QList<real_t> Matlab::DS_fusion(const QList<real_t> &x, const QList<real_t> &y)
 {
     QList<real_t> d;
 

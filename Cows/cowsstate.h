@@ -14,14 +14,16 @@ public:
         Walking         //行走状态
     };
 
+public:
+    CowsState(State state = NoState);
+    CowsState(const CowsState &cow);
+	CowsState(const CowsState *cow);
+    ~CowsState();
+
 private:
     State m_eState;
 
-public:
-    CowsState(State state = NoState);
-    CowsState(CowsState &cow);
-
-    auto getState()->decltype(m_eState) const;
+	State getState() const;
 };
 
 #endif // COWSSTATE_H

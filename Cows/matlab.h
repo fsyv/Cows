@@ -24,7 +24,7 @@ public:
     // numbers : 需要转换的序列
     // aver这组序列的均值
     */
-    static auto NorAverageSequence(const QList<real_t> &numbers)->decltype(numbers);
+	static QList<real_t> NorAverageSequence(const QList<real_t> &numbers);
 
     //前向差分
     static void ForwardDifference(QList<real_t> &numbers);
@@ -57,7 +57,7 @@ public:
     % m(空集)肯定是0
     */
     //nx为x数组的长度
-    static auto DS_fusion(const QList<real_t> &x, const QList<real_t> &y)->decltype(y);
+	static QList<real_t> DS_fusion(const QList<real_t> &x, const QList<real_t> &y);
 
     //根据融合向量得出状态
     static CowsState::State CalcCowState(const QList<real_t> &d);

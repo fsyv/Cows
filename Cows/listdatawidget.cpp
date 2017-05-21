@@ -3,8 +3,6 @@
 #include "listdatawidget.h"
 #include "ui_listdatawidget.h"
 
-#include "tablewidget.h"
-
 #include "sqlexecute.h"
 
 ListDataWidget::ListDataWidget(QWidget *parent) :

@@ -18,13 +18,11 @@ public:
 	/**
 	* 接收到数据源发送来的数据，数据源可以下位机，采集卡，传感器等。
 	*/
-	void dataReceived(qreal x, qreal y, qreal z);
+    void dataReceived(qreal x, qreal y, qreal z);
 
-protected:
-	void timerEvent(QTimerEvent *event) Q_DECL_OVERRIDE;
 private:
+	void getMinMax(const qreal currentValue, qreal &min, qreal &max);
 	
-	int timerId;
 	int maxSize;  // data 最多存储 maxSize 个元素
 	int maxValue; // 业务数据的最大值
 	QList<qreal> data[3];

@@ -26,8 +26,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 HEADERS += \
-    customtablemodel.h \
-    tablewidget.h \
     stdafx.h \
     sqlexecute.h \
     mainwidget.h \
@@ -40,9 +38,7 @@ HEADERS += \
     comdialog.h
 
 SOURCES += \
-    customtablemodel.cpp \
     main.cpp \
-    tablewidget.cpp \
     stdafx.cpp \
     sqlexecute.cpp \
     mainwidget.cpp \

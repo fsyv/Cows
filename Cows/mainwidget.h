@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "cowsstate.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -28,6 +30,7 @@ protected slots:
     void recvData(quint32 tick, qreal x, qreal y, qreal z);
 private:
 	void signalConnect();
+    CowsState::State calculatData(const QList<qreal> &z);
 
     Ui::MainWindow *ui;
 
@@ -35,7 +38,8 @@ private:
     ListDataWidget *ldw;
     ComData *m_pComData;
 
-	QList<qreal> t, x, y, z;
+    QList<qreal> zs;
+    QList<CowsState> rorwResult;
 };
 
 #endif // MAINWINDOW_H
