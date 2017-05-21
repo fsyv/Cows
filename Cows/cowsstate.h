@@ -19,7 +19,7 @@ private:
 
 public:
     CowsState(State state = NoState);
-    CowsState(const CowsState &cow);
+    CowsState(CowsState &cow);
 
     auto getState()->decltype(m_eState) const;
 };

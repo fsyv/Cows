@@ -13,6 +13,7 @@
 #include <QtCharts/QValueAxis>
 
 #include <QSqlDatabase>
+#include <QSerialPort>
 #include <QSqlQuery>
 #include <QString>
 #include <QDebug>

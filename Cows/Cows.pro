@@ -29,27 +29,28 @@ HEADERS += \
     customtablemodel.h \
     tablewidget.h \
     stdafx.h \
-    dll.h \
-    NFCOperator.h \
     sqlexecute.h \
     mainwidget.h \
     listdatawidget.h \
     AboutDialog.h \
     matlab.h \
-    cowsstate.h
+    cowsstate.h \
+    comdata.h \
+    cominfo.h
 
 SOURCES += \
     customtablemodel.cpp \
     main.cpp \
     tablewidget.cpp \
-    NFCOperator.cpp \
     stdafx.cpp \
     sqlexecute.cpp \
     mainwidget.cpp \
     listdatawidget.cpp \
     AboutDialog.cpp \
     matlab.cpp \
-    cowsstate.cpp
+    cowsstate.cpp \
+    comdata.cpp \
+    cominfo.cpp
 
 RC_FILE=Cows.rc
 

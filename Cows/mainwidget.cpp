@@ -7,6 +7,8 @@
 #include "listdatawidget.h"
 #include "sqlexecute.h"
 
+#include "comdata.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -27,6 +29,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->stackedWidget->addWidget(ldw);
 
 	ui->stackedWidget->setCurrentIndex(1);
+
+    ComData *data = new ComData(QString("COM2"));
 }
 
 MainWindow::~MainWindow()

@@ -27,6 +27,7 @@ void TableWidget::addData(const QList<qreal> &t, const QList<qreal> &x, const QL
     m_pTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     m_pTableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
+
     m_pChart = new QChart;
     m_pChart->setAnimationOptions(QChart::AllAnimations);
 
