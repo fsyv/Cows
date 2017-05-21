@@ -6,12 +6,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>233</width>
+    <height>263</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>233</width>
+    <height>263</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>233</width>
+    <height>263</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string> </string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
@@ -71,7 +83,7 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
-           <widget class="QComboBox" name="comboBoxConName"/>
+           <widget class="QComboBox" name="comboBoxComName"/>
           </item>
           <item>
            <widget class="QComboBox" name="comboBoxBaudRate">

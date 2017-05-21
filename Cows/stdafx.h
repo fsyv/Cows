@@ -12,6 +12,7 @@
 #include <QtCharts/QVXYModelMapper>
 #include <QtCharts/QValueAxis>
 
+#include <QSerialPortInfo>
 #include <QSqlDatabase>
 #include <QSerialPort>
 #include <QSqlQuery>
@@ -20,6 +21,8 @@
 
 #include<vector>
 
+#include <windows.h>
+#include <dbt.h>
 
 #include "customtablemodel.h"
 #include "matlab.h"
