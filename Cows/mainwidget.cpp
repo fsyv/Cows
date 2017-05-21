@@ -8,6 +8,8 @@
 #include "sqlexecute.h"
 #include "RealTimeCurveQChartWidget.h"
 
+#include "comdialog.h"
+
 #include "comdata.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -28,12 +30,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
 	
 
-	ListDataWidget *ldw = new ListDataWidget;
+    ldw = new ListDataWidget;
 	ui->stackedWidget->addWidget(ldw);
 
 	ui->stackedWidget->setCurrentIndex(1);
 
-    ComData *data = new ComData(QString("COM2"));
+    ComDialog comdialog;
+    comdialog.exec();
 }
 
 MainWindow::~MainWindow()
@@ -79,7 +82,7 @@ void MainWindow::showAbout()
 
 void MainWindow::showHistory()
 {
-	ui->stackedWidget->setCurrentIndex(2);
+    ui->stackedWidget->setCurrentIndex(2);
 }
 
 void MainWindow::exportData()

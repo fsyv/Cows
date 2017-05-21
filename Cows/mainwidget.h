@@ -8,6 +8,7 @@ class MainWindow;
 }
 
 class RealTimeCurveQChartWidget;
+class ListDataWidget;
 
 class MainWindow : public QMainWindow
 {
@@ -29,6 +30,7 @@ private:
     Ui::MainWindow *ui;
 
 	RealTimeCurveQChartWidget *cw;
+    ListDataWidget *ldw;
 
 	QList<qreal> t, x, y, z;
 };

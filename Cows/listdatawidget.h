@@ -10,7 +10,6 @@ namespace Ui {
 class ListDataWidget : public QWidget
 {
 	Q_OBJECT
-
 public:
 	explicit ListDataWidget(QWidget *parent = 0);
 	~ListDataWidget();

@@ -36,7 +36,9 @@ HEADERS += \
     matlab.h \
     cowsstate.h \
     comdata.h \
-    cominfo.h
+    cominfo.h \
+    RealTimeCurveQChartWidget.h \
+    comdialog.h
 
 SOURCES += \
     customtablemodel.cpp \
@@ -50,13 +52,16 @@ SOURCES += \
     matlab.cpp \
     cowsstate.cpp \
     comdata.cpp \
-    cominfo.cpp
+    cominfo.cpp \
+    RealTimeCurveQChartWidget.cpp \
+    comdialog.cpp
 
 RC_FILE=Cows.rc
 
 FORMS += \
     MainWindow.ui \
-    listdatawidget.ui
+    listdatawidget.ui \
+    comdialog.ui
 
 RESOURCES += \
     resource.qrc
