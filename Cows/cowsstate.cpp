@@ -5,7 +5,7 @@ CowsState::CowsState(State state)
     m_eState = state;
 }
 
-CowsState::CowsState(const CowsState &cow)
+CowsState::CowsState(CowsState &cow)
 {
     m_eState = cow.getState();
 }

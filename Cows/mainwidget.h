@@ -7,7 +7,7 @@ namespace Ui {
 class MainWindow;
 }
 
-class TableWidget;
+class RealTimeCurveQChartWidget;
 
 class MainWindow : public QMainWindow
 {
@@ -28,7 +28,9 @@ private:
 
     Ui::MainWindow *ui;
 
-	TableWidget *tw;
+	RealTimeCurveQChartWidget *cw;
+
+	QList<qreal> t, x, y, z;
 };
 
 #endif // MAINWINDOW_H

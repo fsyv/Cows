@@ -18,106 +18,6 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <widget class="QGroupBox" name="groupBox">
-          <property name="title">
-           <string>操作</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_2">
-           <item>
-            <widget class="QToolButton" name="toolButton_chart">
-             <property name="minimumSize">
-              <size>
-               <width>100</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background:#f9923f;
-font:20px;</string>
-             </property>
-             <property name="text">
-              <string>实时数据
-图表显示</string>
-             </property>
-             <property name="checkable">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pushButton_history">
-             <property name="minimumSize">
-              <size>
-               <width>100</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background:#f9923f;
-font:20px;</string>
-             </property>
-             <property name="text">
-              <string>历史数
-据查看</string>
-             </property>
-             <property name="checkable">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="toolButton_nfc">
-             <property name="minimumSize">
-              <size>
-               <width>100</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="sizeIncrement">
-              <size>
-               <width>2</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background:#f9923f;
-font:20px;</string>
-             </property>
-             <property name="text">
-              <string>NFC
-操作</string>
-             </property>
-             <property name="checkable">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
          <number>1</number>
@@ -130,13 +30,14 @@ font:20px;</string>
     </item>
    </layout>
   </widget>
+  <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -147,14 +48,6 @@ font:20px;</string>
     <addaction name="action_import"/>
     <addaction name="action_exit"/>
    </widget>
-   <widget class="QMenu" name="menuNFC">
-    <property name="title">
-     <string>NFC</string>
-    </property>
-    <addaction name="action_7"/>
-    <addaction name="action_6"/>
-    <addaction name="action_8"/>
-   </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
      <string>帮助</string>
@@ -162,11 +55,18 @@ font:20px;</string>
     <addaction name="action_about"/>
     <addaction name="action_Qt"/>
    </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="title">
+     <string>操作</string>
+    </property>
+    <addaction name="action_showchart"/>
+    <addaction name="separator"/>
+    <addaction name="action_history"/>
+   </widget>
    <addaction name="menu"/>
-   <addaction name="menuNFC"/>
+   <addaction name="menu_3"/>
    <addaction name="menu_2"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="action_export">
    <property name="icon">
     <iconset resource="resource.qrc">
@@ -237,6 +137,16 @@ font:20px;</string>
    </property>
    <property name="text">
     <string>关于Qt</string>
+   </property>
+  </action>
+  <action name="action_showchart">
+   <property name="text">
+    <string>实时数据显示</string>
+   </property>
+  </action>
+  <action name="action_history">
+   <property name="text">
+    <string>历史数据查看</string>
    </property>
   </action>
  </widget>

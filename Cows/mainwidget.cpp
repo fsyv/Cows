@@ -6,6 +6,7 @@
 #include "AboutDialog.h"
 #include "listdatawidget.h"
 #include "sqlexecute.h"
+#include "RealTimeCurveQChartWidget.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -20,8 +21,10 @@ MainWindow::MainWindow(QWidget *parent) :
 	//移除一个多余的没有用的窗体
 	ui->stackedWidget->removeWidget(ui->stackedWidget->widget(1));
 
-	tw = new TableWidget;
-	ui->stackedWidget->addWidget(tw);
+	cw = new RealTimeCurveQChartWidget;
+	ui->stackedWidget->addWidget(cw);
+
+	
 
 	ListDataWidget *ldw = new ListDataWidget;
 	ui->stackedWidget->addWidget(ldw);
@@ -48,8 +51,8 @@ void MainWindow::signalConnect()
 
 
 	/*********************QToolButton*************************/
-	connect(ui->toolButton_chart, &QToolButton::clicked, this, &MainWindow::showChart);
-	connect(ui->pushButton_history, &QPushButton::clicked, this, &MainWindow::showHistory);
+	connect(ui->action_showchart, &QAction::triggered, this, &MainWindow::showChart);
+	connect(ui->action_history, &QAction::triggered, this, &MainWindow::showHistory);
 
 	//导出数据action
 	connect(ui->action_export, &QAction::triggered, this, &MainWindow::exportData);
@@ -61,8 +64,6 @@ void MainWindow::showChart()
 {
 	ui->stackedWidget->setCurrentIndex(1);
 
-	//ui->pushButton_history->setCheckable(false);
-	//ui->toolButton_nfc->setCheckable(false);
 }
 
 void MainWindow::showAbout()
@@ -97,7 +98,7 @@ void MainWindow::exportData()
 			}
 		}
 
-		SQLExecute::exportData(table, tw->getTableModel()->getData());
+		//SQLExecute::exportData(table, tw->getTableModel()->getData());
 	}
 	else
 	{
