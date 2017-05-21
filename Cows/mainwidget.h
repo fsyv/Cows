@@ -9,6 +9,7 @@ class MainWindow;
 
 class RealTimeCurveQChartWidget;
 class ListDataWidget;
+class ComData;
 
 class MainWindow : public QMainWindow
 {
@@ -24,6 +25,7 @@ protected slots:
 	void showHistory();
 	void exportData();
     void importData();
+    void recvData(quint32 tick, qreal x, qreal y, qreal z);
 private:
 	void signalConnect();
 
@@ -31,6 +33,7 @@ private:
 
 	RealTimeCurveQChartWidget *cw;
     ListDataWidget *ldw;
+    ComData *m_pComData;
 
 	QList<qreal> t, x, y, z;
 };

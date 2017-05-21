@@ -37,6 +37,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ComDialog comdialog;
     comdialog.exec();
+
+    m_pComData = new ComData(comdialog.getSerialPort());
+    connect(m_pComData, &ComData::dataRecv, this, &MainWindow::recvData);
+    m_pComData->start();
 }
 
 MainWindow::~MainWindow()
@@ -116,4 +120,9 @@ void MainWindow::exportData()
 void MainWindow::importData()
 {
 
+}
+
+void MainWindow::recvData(quint32 tick, qreal x, qreal y, qreal z)
+{
+    qDebug()<<"tick = " << tick << "x = " << x << "y = " << y << "z = " << z;
 }

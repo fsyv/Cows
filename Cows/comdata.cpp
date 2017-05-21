@@ -2,36 +2,40 @@
 
 #include "comdata.h"
 
-ComData::ComData(const QString &portName)
+ComData::ComData(QSerialPort *serialPort)
 {
-    m_pSerialPort = new QSerialPort();
-
-    m_pSerialPort->setPortName(portName);
-    if(m_pSerialPort->open(QIODevice::ReadOnly))
-    {
-        m_pSerialPort->setBaudRate(QSerialPort::Baud9600);
-        m_pSerialPort->setDataBits(QSerialPort::Data8);
-        m_pSerialPort->setParity(QSerialPort::NoParity);
-        m_pSerialPort->setStopBits(QSerialPort::OneStop);
-        m_pSerialPort->setFlowControl(QSerialPort::NoFlowControl);
-
-        m_iTimerID = startTimer(1000);
-    }
-    else
-    {
-        QMessageBox::critical(nullptr, QString("错误"), QString("串口打开失败"));
-    }
+    m_pSerialPort = serialPort;
+    m_ui32Tick = 0;
 }
 
 ComData::~ComData()
 {
     killTimer(m_iTimerID);
-    delete m_pSerialPort;
+    if(m_pSerialPort)
+        delete m_pSerialPort;
+    m_pSerialPort = nullptr;
+}
+
+void ComData::start()
+{
+    m_iTimerID = startTimer(1);
 }
 
 
 
 void ComData::timerEvent(QTimerEvent *e)
 {
-    qDebug() << m_pSerialPort->readAll();
+    QByteArray byteArray = m_pSerialPort->readAll();
+    if(byteArray.size() > 1)
+    {
+        QStringList xyzList = QString(byteArray).split(',');
+        if(xyzList.size() >= 3)
+        {
+            emit dataRecv(m_ui32Tick++, \
+                          xyzList.at(0).toDouble(), \
+                          xyzList.at(1).toDouble(), \
+                          xyzList.at(2).toDouble()  \
+                          );
+        }
+    }
 }
