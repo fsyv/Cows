@@ -20,7 +20,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 	signalConnect();
 
-	
 
 	//移除一个多余的没有用的窗体
 	ui->stackedWidget->removeWidget(ui->stackedWidget->widget(1));
@@ -124,5 +123,5 @@ void MainWindow::importData()
 
 void MainWindow::recvData(quint32 tick, qreal x, qreal y, qreal z)
 {
-    qDebug()<<"tick = " << tick << "x = " << x << "y = " << y << "z = " << z;
+	cw->dataReceived(x, y, z);
 }
