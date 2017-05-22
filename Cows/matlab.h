@@ -3,8 +3,6 @@
 
 #include <QList>
 
-#include "cowsstate.h"
-
 typedef qreal real_t;
 
 const real_t epsilon1 = 0.2;
@@ -60,7 +58,7 @@ public:
 	static QList<real_t> DS_fusion(const QList<real_t> &x, const QList<real_t> &y);
 
     //根据融合向量得出状态
-    static CowsState::State CalcCowState(const QList<real_t> &d);
+    static bool CalcCowState(const QList<real_t> &d);
 };
 
 #endif // MATLAB_H

@@ -234,25 +234,25 @@ QList<real_t> Matlab::DS_fusion(const QList<real_t> &x, const QList<real_t> &y)
     return d;
 }
 
-CowsState::State Matlab::CalcCowState(const QList<real_t> &d)
+bool Matlab::CalcCowState(const QList<real_t> &d)
 {
     if(d.size() != 3)
-        return CowsState::State::NoState;
+        throw QString("no state!");
 
     if(d[0] - d[1] > epsilon1 && d[2] < epsilon2)
     {
         //行走
-        return CowsState::State::Walking;
+        return false;
     }
     else if(d[1] - d[0] > epsilon1 && d[2] < epsilon2)
     {
         //奔跑
-        return CowsState::State::Running;
+        return true;
     }
     else
     {
         //不能判断出状态
-        return CowsState::State::NoState;
+        throw QString("no state!");
     }
 }
 

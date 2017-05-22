@@ -44,5 +44,8 @@ void ListDataWidget::showData(const QModelIndex &index)
 		)
 		);
 	tableWidget.exec();*/
+    SQLExecute::importData(
+    ui->listWidget->item(index.row())->text()
+    );
 	//show();
 }

@@ -4,8 +4,6 @@
 #include <QMainWindow>
 #include <QMap>
 
-#include "cowsstate.h"
-
 namespace Ui {
 class MainWindow;
 }
@@ -22,6 +20,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+protected:
+    void closeEvent(QCloseEvent *e);
+
 protected slots:
 	void showChart();
 	void showAbout();
@@ -30,8 +31,9 @@ protected slots:
     void importData();
     void recvData(quint32 tick, qreal x, qreal y, qreal z);
 private:
+    void exportData(bool &ok);
 	void signalConnect();
-    CowsState::State calculatData(const QList<qreal> &z);
+    bool calculatData(const QList<qreal> &z);
 
     Ui::MainWindow *ui;
 
@@ -39,8 +41,8 @@ private:
     ListDataWidget *ldw;
     ComData *m_pComData;
 
-    QList<CowsState> rorwResult;
-    QMap<char, QList<qreal> * > m_data;
+    //true为跑，false为走
+    QList<bool> rorwResult;
     QList<qreal> zs;
 };
 

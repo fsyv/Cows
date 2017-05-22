@@ -17,6 +17,7 @@
 #include <QSerialPort>
 #include <QSqlQuery>
 #include <QString>
+#include <QList>
 #include <QDebug>
 
 #include<vector>
@@ -26,4 +27,3 @@
 #include <dbt.h>
 
 #include "matlab.h"
-#include "cowsstate.h"

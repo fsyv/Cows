@@ -32,7 +32,6 @@ HEADERS += \
     listdatawidget.h \
     AboutDialog.h \
     matlab.h \
-    cowsstate.h \
     comdata.h \
     RealTimeCurveQChartWidget.h \
     comdialog.h
@@ -45,7 +44,6 @@ SOURCES += \
     listdatawidget.cpp \
     AboutDialog.cpp \
     matlab.cpp \
-    cowsstate.cpp \
     comdata.cpp \
     RealTimeCurveQChartWidget.cpp \
     comdialog.cpp

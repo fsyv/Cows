@@ -19,12 +19,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     signalConnect();
 
-    m_data.insert('t', new QList<qreal>);
-    m_data.insert('x', new QList<qreal>);
-    m_data.insert('y', new QList<qreal>);
-    m_data.insert('z', new QList<qreal>);
-
-
     //移除一个多余的没有用的窗体
     ui->stackedWidget->removeWidget(ui->stackedWidget->widget(1));
 
@@ -45,14 +39,46 @@ MainWindow::MainWindow(QWidget *parent) :
     //connect(m_pComData, &ComData::dataRecv, this, &MainWindow::recvData);
     //m_pComData->start();
 
-	m_pComData = new ComData(nullptr);
-	connect(m_pComData, &ComData::dataRecv, this, &MainWindow::recvData);
-	m_pComData->start();
+    m_pComData = new ComData(nullptr);
+    connect(m_pComData, &ComData::dataRecv, this, &MainWindow::recvData);
+    m_pComData->start();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::closeEvent(QCloseEvent *e)
+{
+    if(rorwResult.size())
+    {
+        //数据没有导出
+        QMessageBox::StandardButton button =
+                QMessageBox::question(nullptr, "提示", "是否保存当前数据？", (QMessageBox::Yes | QMessageBox::No | QMessageBox ::Cancel));
+        if (QMessageBox::Yes == button)
+        {
+            bool ok;
+            exportData(ok);
+            if(ok)
+                QMainWindow::closeEvent(e);
+            else
+                e->ignore();
+        }
+        else if(QMessageBox::No == button)
+        {
+            rorwResult.clear();
+            QMainWindow::closeEvent(e);
+        }
+        else
+        {
+            e->ignore();
+        }
+    }
+    else
+    {
+        QMainWindow::closeEvent(e);
+    }
 }
 
 void MainWindow::signalConnect()
@@ -73,12 +99,12 @@ void MainWindow::signalConnect()
     connect(ui->action_history, &QAction::triggered, this, &MainWindow::showHistory);
 
     //导出数据action
-    connect(ui->action_export, &QAction::triggered, this, &MainWindow::exportData);
+    connect(ui->action_export, SIGNAL(triggered(bool)), this, SLOT(exportData()));
     //导入数据action
     connect(ui->action_import, &QAction::triggered, this, &MainWindow::importData);
 }
 
-CowsState::State MainWindow::calculatData(const QList<qreal> &z)
+bool MainWindow::calculatData(const QList<qreal> &z)
 {
     QList<qreal> s = Matlab::NorAverageSequence(z);
     Matlab::ForwardDifference(s);
@@ -88,13 +114,17 @@ CowsState::State MainWindow::calculatData(const QList<qreal> &z)
     QList<real_t> d = Matlab::DS_fusion(Matlab::DS_fusion(a, b), Matlab::DS_fusion(a, c));
 
     //需要保存的状态
-    return Matlab::CalcCowState(d);
+    try{
+        return Matlab::CalcCowState(d);
+    }
+    catch(QString e){
+        throw e;
+    }
 }
 
 void MainWindow::showChart()
 {
     ui->stackedWidget->setCurrentIndex(1);
-
 }
 
 void MainWindow::showAbout()
@@ -129,7 +159,7 @@ loop:
             }
         }
 
-        //SQLExecute::exportData(table, tw->getTableModel()->getData());
+        SQLExecute::exportData(table, rorwResult);
     }
     else
     {
@@ -148,13 +178,39 @@ void MainWindow::recvData(quint32 tick, qreal x, qreal y, qreal z)
 
     if(tick % 50 == 0 && tick > 0)
     {
-        rorwResult.append(CowsState(calculatData(zs)));
+        try{
+            bool isRunning = calculatData(zs);
+            rorwResult.append(isRunning);
+        }
+        catch (QString e){
+            qDebug() << e;
+        }
         zs.clear();
     }
 
     zs.append(z);
-    m_data.value('t')->append(tick);
-    m_data.value('x')->append(x);
-    m_data.value('y')->append(y);
-    m_data.value('z')->append(z);
+}
+
+
+void MainWindow::exportData(bool &ok)
+{
+loop:
+    QString name = QInputDialog::getText(nullptr, "保存数据", "请输入保存的名字：", QLineEdit::Normal, QString(), &ok);
+
+    if (ok)
+    {
+        QString table = QString("%1_%2").arg(QDate::currentDate().toString("yyyy-MM-dd")).arg(name);
+
+        if (SQLExecute::getAllTableName().contains(table))
+        {
+            //保存的表中已经包含了这个表
+            if (QMessageBox::Cancel == QMessageBox::question(nullptr, "提示", "名字已经存在，是否追加数据？"))
+            {
+                //大返回
+                goto loop;
+            }
+        }
+
+        SQLExecute::exportData(table, rorwResult);
+    }
 }

@@ -20,7 +20,7 @@ ComData::~ComData()
 
 void ComData::start()
 {
-    m_iTimerID = startTimer(1000);
+    m_iTimerID = startTimer(50);
 }
 
 
