@@ -23,7 +23,7 @@ ComData::~ComData()
 
 void ComData::start()
 {
-    m_iTimerID = startTimer(50);
+    m_iTimerID = startTimer(1);
 }
 
 void ComData::stop()
@@ -50,5 +50,5 @@ void ComData::timerEvent(QTimerEvent *e)
     //                      );
     //    }
     //}
-    emit dataRecv(m_ui32Tick++, qrand() % 10 - 5, qrand() % 10 - 5, qrand() % 10 - 5);
+	emit dataRecv(m_ui32Tick++, (qrand() % 400 - 200) * 0.01, (qrand() % 400 - 200) * 0.01, (qrand() % 400 - 200) * 0.01);
 }
