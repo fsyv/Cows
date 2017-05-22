@@ -35,11 +35,8 @@ SQLExecute *SQLExecute::getInstance()
 }
 
 //导出数据
-void SQLExecute::exportData(QString tableName, QMap<char, QList<qreal> * > *data)
+void SQLExecute::exportData(QString tableName, const QMap<char, QList<qreal> * > data)
 {
-	if (!data)
-		return;
-
 	SQLExecute *pInstance = SQLExecute::getInstance();
 
 	QSqlQuery query(*pInstance->db);
@@ -55,16 +52,16 @@ void SQLExecute::exportData(QString tableName, QMap<char, QList<qreal> * > *data
 
 	query.prepare(QString("INSERT INTO '%1' VALUES(?, ?, ?, ?)").arg(tableName));
 
-	QList<qreal> *t = data->value('t');
+    QList<qreal> *t = data.value('t');
 
 	if (t)
 	{
 		for (int i = 0; i < t->count(); ++i)
 		{
 			query.bindValue(0, t->at(i));
-			query.bindValue(1, data->value('x')->at(i));
-			query.bindValue(2, data->value('y')->at(i));
-			query.bindValue(3, data->value('z')->at(i));
+            query.bindValue(1, data.value('x')->at(i));
+            query.bindValue(2, data.value('y')->at(i));
+            query.bindValue(3, data.value('z')->at(i));
 
 			query.exec();
 		}

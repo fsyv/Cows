@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMap>
 
 #include "cowsstate.h"
 
@@ -38,8 +39,9 @@ private:
     ListDataWidget *ldw;
     ComData *m_pComData;
 
-    QList<qreal> zs;
     QList<CowsState> rorwResult;
+    QMap<char, QList<qreal> * > m_data;
+    QList<qreal> zs;
 };
 
 #endif // MAINWINDOW_H

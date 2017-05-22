@@ -19,6 +19,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     signalConnect();
 
+    m_data.insert('t', new QList<qreal>);
+    m_data.insert('x', new QList<qreal>);
+    m_data.insert('y', new QList<qreal>);
+    m_data.insert('z', new QList<qreal>);
+
 
     //移除一个多余的没有用的窗体
     ui->stackedWidget->removeWidget(ui->stackedWidget->widget(1));
@@ -33,12 +38,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->stackedWidget->setCurrentIndex(1);
 
-    ComDialog comdialog;
-    comdialog.exec();
+    //ComDialog comdialog;
+    //comdialog.exec();
 
-    m_pComData = new ComData(comdialog.getSerialPort());
-    connect(m_pComData, &ComData::dataRecv, this, &MainWindow::recvData);
-    m_pComData->start();
+    //m_pComData = new ComData(comdialog.getSerialPort());
+    //connect(m_pComData, &ComData::dataRecv, this, &MainWindow::recvData);
+    //m_pComData->start();
+
+	m_pComData = new ComData(nullptr);
+	connect(m_pComData, &ComData::dataRecv, this, &MainWindow::recvData);
+	m_pComData->start();
 }
 
 MainWindow::~MainWindow()
@@ -139,10 +148,13 @@ void MainWindow::recvData(quint32 tick, qreal x, qreal y, qreal z)
 
     if(tick % 50 == 0 && tick > 0)
     {
-		CowsState cows(calculatData(zs));
-        rorwResult.append(cows);
+        rorwResult.append(CowsState(calculatData(zs)));
         zs.clear();
     }
 
     zs.append(z);
+    m_data.value('t')->append(tick);
+    m_data.value('x')->append(x);
+    m_data.value('y')->append(y);
+    m_data.value('z')->append(z);
 }

@@ -15,7 +15,7 @@ public:
     ~SQLExecute();
 
     //导出数据
-	static void exportData(QString tableName, QMap<char, QList<qreal> * > *data);
+    static void exportData(QString tableName, const QMap<char, QList<qreal> * > data);
     //导入数据
 	static QMap<char, QList<qreal> * > importData(QString tableName);
 	//查询所有表名
