@@ -15,9 +15,9 @@ public:
     ~SQLExecute();
 
     //导出数据
-    static void exportData(const QString &tableName, const QList<bool> &data);
+    static void exportData(const QString &tableName, const QList<int> &data);
     //导入数据
-    static QList<bool> importData(QString tableName);
+    static QList<int> importData(QString tableName);
 	//查询所有表名
 	static QStringList getAllTableName();
 

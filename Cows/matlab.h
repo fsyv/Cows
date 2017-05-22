@@ -58,7 +58,7 @@ public:
 	static QList<real_t> DS_fusion(const QList<real_t> &x, const QList<real_t> &y);
 
     //根据融合向量得出状态
-    static bool CalcCowState(const QList<real_t> &d);
+    static int CalcCowState(const QList<real_t> &d);
 };
 
 #endif // MATLAB_H

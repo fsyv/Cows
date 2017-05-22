@@ -104,7 +104,7 @@ void MainWindow::signalConnect()
     connect(ui->action_import, &QAction::triggered, this, &MainWindow::importData);
 }
 
-bool MainWindow::calculatData(const QList<qreal> &z)
+int MainWindow::calculatData(const QList<qreal> &z)
 {
     QList<qreal> s = Matlab::NorAverageSequence(z);
     Matlab::ForwardDifference(s);
@@ -114,12 +114,7 @@ bool MainWindow::calculatData(const QList<qreal> &z)
     QList<real_t> d = Matlab::DS_fusion(Matlab::DS_fusion(a, b), Matlab::DS_fusion(a, c));
 
     //需要保存的状态
-    try{
-        return Matlab::CalcCowState(d);
-    }
-    catch(QString e){
-        throw e;
-    }
+    return Matlab::CalcCowState(d);
 }
 
 void MainWindow::showChart()
@@ -142,6 +137,7 @@ void MainWindow::showHistory()
 void MainWindow::exportData()
 {
     bool ok = false;
+    m_pComData->stop();
 loop:
     QString name = QInputDialog::getText(nullptr, "保存数据", "请输入保存的名字：", QLineEdit::Normal, QString(), &ok);
 
@@ -158,12 +154,13 @@ loop:
                 goto loop;
             }
         }
-
         SQLExecute::exportData(table, rorwResult);
+        rorwResult.clear();
+        QMessageBox::information(nullptr, "提示", "导出成功！");
     }
     else
     {
-
+        m_pComData->start();
     }
 }
 
@@ -178,13 +175,7 @@ void MainWindow::recvData(quint32 tick, qreal x, qreal y, qreal z)
 
     if(tick % 50 == 0 && tick > 0)
     {
-        try{
-            bool isRunning = calculatData(zs);
-            rorwResult.append(isRunning);
-        }
-        catch (QString e){
-            qDebug() << e;
-        }
+        rorwResult.append(calculatData(zs));
         zs.clear();
     }
 
@@ -194,6 +185,7 @@ void MainWindow::recvData(quint32 tick, qreal x, qreal y, qreal z)
 
 void MainWindow::exportData(bool &ok)
 {
+    m_pComData->stop();
 loop:
     QString name = QInputDialog::getText(nullptr, "保存数据", "请输入保存的名字：", QLineEdit::Normal, QString(), &ok);
 
@@ -212,5 +204,10 @@ loop:
         }
 
         SQLExecute::exportData(table, rorwResult);
+        rorwResult.clear();
+    }
+    else
+    {
+        m_pComData->start();
     }
 }

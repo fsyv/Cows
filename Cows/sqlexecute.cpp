@@ -35,7 +35,7 @@ SQLExecute *SQLExecute::getInstance()
 }
 
 //导出数据
-void SQLExecute::exportData(const QString &tableName, const QList<bool> &data)
+void SQLExecute::exportData(const QString &tableName, const QList<int> &data)
 {
     SQLExecute *pInstance = SQLExecute::getInstance();
 
@@ -44,7 +44,7 @@ void SQLExecute::exportData(const QString &tableName, const QList<bool> &data)
     query.exec(
                 QString("CREATE TABLE IF NOT EXISTS '%1'(%2)") \
                 .arg(tableName) \
-                .arg(QString("_state BOOLEAN")) \
+                .arg(QString("_state INT2")) \
                 );
 
     query.prepare(QString("INSERT INTO '%1' VALUES(?)").arg(tableName));
@@ -59,7 +59,7 @@ void SQLExecute::exportData(const QString &tableName, const QList<bool> &data)
 }
 
 //导入数据
-QList<bool> SQLExecute::importData(QString tableName)
+QList<int> SQLExecute::importData(QString tableName)
 {
     SQLExecute *pInstance = SQLExecute::getInstance();
 
@@ -67,11 +67,11 @@ QList<bool> SQLExecute::importData(QString tableName)
 
     query.exec(QString("SELECT * FROM '%1'").arg(tableName));
 
-    QList<bool> result;
+    QList<int> result;
 
     while (query.next())
     {
-        result.append(query.value(QString("_state")).toBool());
+        result.append(query.value(QString("_state")).toInt());
     }
 
     return result;

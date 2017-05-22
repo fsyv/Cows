@@ -7,12 +7,15 @@ ComData::ComData(QSerialPort *serialPort)
     m_pSerialPort = serialPort;
     m_ui32Tick = 0;
 
-	qsrand(QDateTime::currentDateTime().toTime_t());
+    qsrand(QDateTime::currentDateTime().toTime_t());
 }
 
 ComData::~ComData()
 {
-    killTimer(m_iTimerID);
+    if(m_iTimerID)
+        killTimer(m_iTimerID);
+    m_iTimerID = 0;
+
     if(m_pSerialPort)
         delete m_pSerialPort;
     m_pSerialPort = nullptr;
@@ -21,6 +24,13 @@ ComData::~ComData()
 void ComData::start()
 {
     m_iTimerID = startTimer(50);
+}
+
+void ComData::stop()
+{
+    if(m_iTimerID)
+        killTimer(m_iTimerID);
+    m_iTimerID = 0;
 }
 
 
@@ -40,5 +50,5 @@ void ComData::timerEvent(QTimerEvent *e)
     //                      );
     //    }
     //}
-	emit dataRecv(m_ui32Tick++, qrand() % 10 - 5, qrand() % 10 - 5, qrand() % 10 - 5);
+    emit dataRecv(m_ui32Tick++, qrand() % 10 - 5, qrand() % 10 - 5, qrand() % 10 - 5);
 }

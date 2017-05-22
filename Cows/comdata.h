@@ -13,6 +13,7 @@ public:
     ~ComData();
 
     void start();
+    void stop();
 
 private:
     QSerialPort *m_pSerialPort;

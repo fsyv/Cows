@@ -33,7 +33,7 @@ protected slots:
 private:
     void exportData(bool &ok);
 	void signalConnect();
-    bool calculatData(const QList<qreal> &z);
+    int calculatData(const QList<qreal> &z);
 
     Ui::MainWindow *ui;
 
@@ -42,7 +42,7 @@ private:
     ComData *m_pComData;
 
     //true为跑，false为走
-    QList<bool> rorwResult;
+    QList<int> rorwResult;
     QList<qreal> zs;
 };
 
