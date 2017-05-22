@@ -92,3 +92,14 @@ QStringList SQLExecute::getAllTableName()
 
     return tableList;
 }
+
+void SQLExecute::deleteTable(const QString &name)
+{
+    SQLExecute *pInstance = SQLExecute::getInstance();
+
+    QSqlQuery sqlquery(*pInstance->db);
+
+    sqlquery.exec(QString("DROP TABLE '%1'").arg(name));
+
+    pInstance->db->commit();
+}

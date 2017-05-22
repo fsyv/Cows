@@ -20,6 +20,10 @@ protected:
 private slots :
 	void showData(const QModelIndex &index);
 
+    void on_listWidget_customContextMenuRequested(const QPoint &pos);
+
+    void deleteSeedSlot();
+
 private:
 	void clearData();
 	void loadData();

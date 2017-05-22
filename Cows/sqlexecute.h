@@ -20,6 +20,8 @@ public:
     static QList<int> importData(QString tableName);
 	//查询所有表名
 	static QStringList getAllTableName();
+    //
+    static void deleteTable(const QString &name);
 
 private:
     explicit SQLExecute(QObject *parent = 0);
