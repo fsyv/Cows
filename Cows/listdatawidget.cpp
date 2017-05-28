@@ -3,6 +3,8 @@
 #include "listdatawidget.h"
 #include "ui_listdatawidget.h"
 
+#include "pieserieswidget.h"
+
 #include "sqlexecute.h"
 
 ListDataWidget::ListDataWidget(QWidget *parent) :
@@ -37,17 +39,12 @@ void ListDataWidget::clearData()
 
 void ListDataWidget::showData(const QModelIndex &index)
 {
-    //hide();
-    /*TableWidget tableWidget(
-        SQLExecute::importData(
-        ui->listWidget->item(index.row())->text()
-        )
-        );
-    tableWidget.exec();*/
-    SQLExecute::importData(
-                ui->listWidget->item(index.row())->text()
-                );
-    //show();
+    PieSeriesWidget w;
+    w.setValue(SQLExecute::importData(
+                   ui->listWidget->item(index.row())->text()
+                   ));
+    w.resize(size() * 0.618);
+    w.exec();
 }
 
 void ListDataWidget::on_listWidget_customContextMenuRequested(const QPoint &pos)

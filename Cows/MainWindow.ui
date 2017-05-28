@@ -37,7 +37,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -62,6 +62,8 @@
     <addaction name="action_showchart"/>
     <addaction name="separator"/>
     <addaction name="action_history"/>
+    <addaction name="separator"/>
+    <addaction name="action_analysis"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_3"/>
@@ -147,6 +149,12 @@
   <action name="action_history">
    <property name="text">
     <string>历史数据查看</string>
+   </property>
+  </action>
+  <action name="action_analysis">
+   <property name="text">
+    <string>分析数据
+</string>
    </property>
   </action>
  </widget>

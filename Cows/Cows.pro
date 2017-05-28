@@ -34,7 +34,8 @@ HEADERS += \
     matlab.h \
     comdata.h \
     RealTimeCurveQChartWidget.h \
-    comdialog.h
+    comdialog.h \
+    pieserieswidget.h
 
 SOURCES += \
     main.cpp \
@@ -46,7 +47,8 @@ SOURCES += \
     matlab.cpp \
     comdata.cpp \
     RealTimeCurveQChartWidget.cpp \
-    comdialog.cpp
+    comdialog.cpp \
+    pieserieswidget.cpp
 
 RC_FILE=Cows.rc
 

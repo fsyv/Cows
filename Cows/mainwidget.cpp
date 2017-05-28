@@ -6,6 +6,7 @@
 #include "listdatawidget.h"
 #include "sqlexecute.h"
 #include "RealTimeCurveQChartWidget.h"
+#include "pieserieswidget.h"
 
 #include "comdialog.h"
 
@@ -16,6 +17,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    setWindowTitle("Cows");
 
     signalConnect();
 
@@ -32,16 +35,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->stackedWidget->setCurrentIndex(1);
 
-    //ComDialog comdialog;
-    //comdialog.exec();
+    ComDialog comdialog;
+    comdialog.exec();
 
-    //m_pComData = new ComData(comdialog.getSerialPort());
-    //connect(m_pComData, &ComData::dataRecv, this, &MainWindow::recvData);
-    //m_pComData->start();
-
-    m_pComData = new ComData(nullptr);
+    m_pComData = new ComData(comdialog.getSerialPort());
     connect(m_pComData, &ComData::dataRecv, this, &MainWindow::recvData);
     m_pComData->start();
+
+//    m_pComData = new ComData(nullptr);
+//    connect(m_pComData, &ComData::dataRecv, this, &MainWindow::recvData);
+//    m_pComData->start();
 }
 
 MainWindow::~MainWindow()
@@ -102,6 +105,8 @@ void MainWindow::signalConnect()
     connect(ui->action_export, SIGNAL(triggered(bool)), this, SLOT(exportData()));
     //导入数据action
     connect(ui->action_import, &QAction::triggered, this, &MainWindow::importData);
+    //分析数据
+    connect(ui->action_analysis, &QAction::triggered, this, &MainWindow::analysisData);
 }
 
 int MainWindow::calculatData(const QList<qreal> &z)
@@ -167,6 +172,14 @@ loop:
 void MainWindow::importData()
 {
 
+}
+
+void MainWindow::analysisData()
+{
+    PieSeriesWidget w;
+    w.setValue(rorwResult);
+    w.resize(size() * 0.618);
+    w.exec();
 }
 
 void MainWindow::recvData(quint32 tick, qreal x, qreal y, qreal z)

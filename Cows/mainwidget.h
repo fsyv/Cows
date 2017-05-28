@@ -29,6 +29,7 @@ protected slots:
 	void showHistory();
 	void exportData();
     void importData();
+    void analysisData();
     void recvData(quint32 tick, qreal x, qreal y, qreal z);
 private:
     void exportData(bool &ok);

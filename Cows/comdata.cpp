@@ -37,18 +37,18 @@ void ComData::stop()
 
 void ComData::timerEvent(QTimerEvent *e)
 {
-    //QByteArray byteArray = m_pSerialPort->readAll();
-    //if(byteArray.size() > 1)
-    //{
-    //    QStringList xyzList = QString(byteArray).split(',');
-    //    if(xyzList.size() >= 3)
-    //    {
-    //        emit dataRecv(m_ui32Tick++, \
-    //                      xyzList.at(0).toDouble(), \
-    //                      xyzList.at(1).toDouble(), \
-    //                      xyzList.at(2).toDouble()  \
-    //                      );
-    //    }
-    //}
-	emit dataRecv(m_ui32Tick++, (qrand() % 400 - 200) * 0.01, (qrand() % 400 - 200) * 0.01, (qrand() % 400 - 200) * 0.01);
+    QByteArray byteArray = m_pSerialPort->readAll();
+    if(byteArray.size() > 1)
+    {
+        QStringList xyzList = QString(byteArray).split(',');
+        if(xyzList.size() >= 3)
+        {
+            emit dataRecv(m_ui32Tick++, \
+                          xyzList.at(0).toDouble(), \
+                          xyzList.at(1).toDouble(), \
+                          xyzList.at(2).toDouble()  \
+                          );
+        }
+    }
+    //emit dataRecv(m_ui32Tick++, (qrand() % 400 - 200) * 0.01, (qrand() % 400 - 200) * 0.01, (qrand() % 400 - 200) * 0.01);
 }
