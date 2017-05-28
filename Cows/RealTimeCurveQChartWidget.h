@@ -5,11 +5,11 @@
 #include <QList>
 #include <QSplineSeries>
 #include <QScatterSeries>
-#include <QChart>
 #include <QChartView>
 #include <QValueAxis>
 
 using namespace QtCharts;
+
 class RealTimeCurveQChartWidget : public QWidget {
 	Q_OBJECT
 public:
