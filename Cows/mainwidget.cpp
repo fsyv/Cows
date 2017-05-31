@@ -35,16 +35,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->stackedWidget->setCurrentIndex(1);
 
-//    ComDialog comdialog;
-//    comdialog.exec();
+    ComDialog comdialog;
+    comdialog.exec();
 
-//    m_pComData = new ComData(comdialog.getSerialPort());
-//    connect(m_pComData, &ComData::dataRecv, this, &MainWindow::recvData);
-//    m_pComData->start();
-
-//    m_pComData = new ComData(nullptr);
-//    connect(m_pComData, &ComData::dataRecv, this, &MainWindow::recvData);
-//    m_pComData->start();
+    m_pComData = new ComData(comdialog.getSerialPort());
+    connect(m_pComData, &ComData::dataRecv, this, &MainWindow::recvData);
+    m_pComData->start();
 }
 
 MainWindow::~MainWindow()
